@@ -1,0 +1,9 @@
+# Normalize line endings
+* text=auto eol=lf
+
+# Binary assets
+*.{png,jpg,jpeg,gif,webp,ico,svg,woff,woff2,ttf,eot} binary
+
+# Reduce noisy diffs
+package-lock.json -diff linguist-generated=true
+*.snap -diff

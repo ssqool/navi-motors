@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" fill="none">
+  <rect width="600" height="450" fill="#141414"/>
+  <rect x="180" y="120" width="60" height="200" rx="4" fill="#1C1C1C" stroke="#2A2A2A"/>
+  <rect x="270" y="120" width="60" height="200" rx="4" fill="#1C1C1C" stroke="#2A2A2A"/>
+  <rect x="360" y="120" width="60" height="200" rx="4" fill="#1C1C1C" stroke="#2A2A2A"/>
+  <text x="300" y="380" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" fill="#A3A3A3">=AB@C<5=B8</text>
+</svg>
