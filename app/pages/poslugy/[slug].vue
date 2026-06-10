@@ -12,16 +12,28 @@ if (!service) {
   throw createError({ statusCode: 404, statusMessage: 'Послугу не знайдено' })
 }
 
+const breadcrumbs = [
+  { name: 'Головна', path: '/' },
+  { name: 'Послуги', path: '/poslugy' },
+  { name: service.title, path: `/poslugy/${service.slug}` },
+]
+
 useSeo({
   title: service.metaTitle,
   description: service.metaDescription,
   path: `/poslugy/${service.slug}`,
+  ogType: 'article',
 })
 </script>
 
 <template>
-  <div>
-    <SeoJsonLd :service="service" />
+  <article>
+    <SeoJsonLd
+      page-type="service"
+      :service="service"
+      :breadcrumbs="breadcrumbs"
+    />
+    <UiBreadcrumbs :items="breadcrumbs" />
     <HeroSection
       :title="service.h1"
       :subtitle="service.heroText"
@@ -79,7 +91,7 @@ useSeo({
           <h2 class="section-title">Орієнтовна ціна</h2>
           <p class="mt-4 text-3xl font-heading text-accent">{{ service.price }}</p>
           <p class="mt-4 text-sm text-text-muted">
-            Точна вартість залежить від моделі авто, стану деталей та складності робіт.
+            Точна вартість залежить від моделі авто, стану деталей та складності робіт у нашому автосервісі у Києві.
           </p>
         </UiReveal>
       </div>
@@ -112,6 +124,7 @@ useSeo({
       </div>
     </section>
 
+    <RelatedServices :current="service" />
     <LeadForm :source-page="service.title" />
-  </div>
+  </article>
 </template>

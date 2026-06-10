@@ -22,11 +22,23 @@ export const siteConfig = {
   workingHoursSchema: [
     { dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '10:00', closes: '18:00' },
   ],
-  /** Mock-канали звʼязку — підтвердити у клієнта */
+  /** Mock contact channels — confirm with client */
   telegram: 'https://t.me/+380985355080',
   viber: 'viber://chat?number=380985355080',
   email: 'info@navi-motors.com.ua',
   priceRange: '₴₴',
+  geo: {
+    latitude: 50.4366276,
+    longitude: 30.4030185,
+  },
+  /** Service areas for local SEO */
+  areasServed: [
+    'Київ',
+    'Голосіїв',
+    'Соломʼянський район',
+    'Печерський район',
+    'Шевченківський район',
+  ],
 } as const
 
 export const benefits = [

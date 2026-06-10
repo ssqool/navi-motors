@@ -1,112 +1,92 @@
-# Navi Motors — SEO-first сайт автосервісу
+# Navi Motors — SEO-first auto service website
 
-Сайт автосервісу Navi Motors (Київ): послуги, ціни, галерея, форма заявки, SEO-сторінки.
+Marketing website for **Navi Motors**, an auto repair shop in **Kyiv, Ukraine**.  
+Public-facing copy is **Ukrainian**; repo docs and code comments are **English**.
 
-## Стек
+## Stack
 
 - Nuxt 4 + TypeScript + Vue 3
 - Tailwind CSS
-- Vercel (деплой)
-- Telegram Bot API — заявки з форми
+- Vercel (hosting)
+- Telegram Bot API (lead form submissions)
 
-## Локальна розробка
+## Features
+
+- Service pages with local SEO (`/poslugy/[slug]`)
+- Lead form with honeypot, rate limiting, privacy consent
+- JSON-LD (AutoRepair, FAQ, Breadcrumbs, Service)
+- Sitemap, robots, Open Graph, geo meta (Kyiv)
+- Mobile sticky CTA bar
+- Pages: Home, Services, About, Contacts, Privacy Policy
+
+## Local development
 
 ```bash
 npm install
 cp .env.example .env
-# заповнити .env (Telegram bot token, chat id, site url)
+# fill in .env (Telegram bot token, chat id, site url)
 npm run dev
 ```
 
-Сайт: [http://localhost:3000](http://localhost:3000)
+Open [http://localhost:3000](http://localhost:3000)
 
-## Змінні середовища
+## Environment variables
 
-| Змінна | Опис |
-|--------|------|
-| `NUXT_PUBLIC_SITE_URL` | URL сайту (canonical, sitemap, OG) |
-| `NUXT_TELEGRAM_BOT_TOKEN` | Токен Telegram-бота (server-only) |
-| `NUXT_TELEGRAM_CHAT_ID` | Chat ID для заявок (server-only) |
-| `NUXT_META_ACCESS_TOKEN` | Meta token для oEmbed (опціонально) |
-| `NUXT_PUBLIC_GA_ID` | Google Analytics (опціонально) |
-| `NUXT_PUBLIC_PLAUSIBLE_DOMAIN` | Plausible domain (опціонально) |
+| Variable | Description |
+|----------|-------------|
+| `NUXT_PUBLIC_SITE_URL` | Public site URL (canonical, sitemap, OG) |
+| `NUXT_TELEGRAM_BOT_TOKEN` | Telegram bot token (server-only) |
+| `NUXT_TELEGRAM_CHAT_ID` | Chat ID for lead notifications (server-only) |
+| `NUXT_META_ACCESS_TOKEN` | Meta oEmbed token (optional) |
+| `NUXT_PUBLIC_GA_ID` | Google Analytics ID (optional) |
+| `NUXT_PUBLIC_PLAUSIBLE_DOMAIN` | Plausible domain (optional) |
 
-> **Не коміть `.env` у Git.** У репозиторії лише `.env.example`.
+> **Never commit `.env`.** Only `.env.example` belongs in the repo.
 
-## Структура проєкту
+## Project structure
 
 ```
 app/
-  components/   # UI-компоненти
-  data/         # Контент (послуги, ціни, галерея, відгуки)
-  pages/        # Маршрути
-  composables/  # useSeo, useReveal
+  components/   # UI components
+  composables/  # useSeo, useReveal, useStructuredData, useBookingLink
+  data/         # Site content (services, prices, gallery, reviews) — Ukrainian
+  pages/        # Routes
 public/
-  images/       # Лого, галерея, соцмережі
+  images/       # Logo, gallery, social thumbnails
 server/
-  api/          # lead.post, social-preview
+  api/          # lead.post, social-preview, sitemap urls
 ```
 
-## GitHub
+## Deploy to Vercel
 
-### 1. Створити репозиторій
+See [`DEPLOY.md`](DEPLOY.md) for the full checklist.
 
-На [github.com/new](https://github.com/new):
+1. Import the GitHub repo at [vercel.com](https://vercel.com)
+2. Add env vars from `.env.example`
+3. Deploy — SSL is automatic
+4. Set `NUXT_PUBLIC_SITE_URL` to your production domain and redeploy
 
-- Name: `navi-motors`
-- **Private** (рекомендовано для клієнтського проєкту)
-- Без README / .gitignore (вони вже є локально)
+## Scripts
 
-### 2. Залити код
-
-```bash
-cd navi-motors
-
-git init
-git add .
-git status   # переконайся: немає .env, node_modules, .output, .nuxt
-git commit -m "Initial commit: Navi Motors MVP"
-
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/navi-motors.git
-git push -u origin main
-```
-
-### 3. Що має потрапити в репо
-
-- `app/`, `public/`, `server/`
-- `nuxt.config.ts`, `tailwind.config.ts`, `package.json`, `package-lock.json`
-- `.env.example`, `vercel.json`, `DEPLOY.md`
-- `.gitignore`, `.gitattributes`, `.editorconfig`
-
-### 4. Що НЕ має потрапити
-
-- `.env` (секрети)
-- `node_modules/`
-- `.output/`, `.nuxt/`, `.vercel/`
-- `.idea/`, `.cursor/`
-
-## Деплой на Vercel
-
-Детальний чекліст: [`DEPLOY.md`](DEPLOY.md)
-
-1. [vercel.com](https://vercel.com) → Import Git Repository
-2. Додати env-змінні з `.env.example`
-3. Deploy → отримаєш preview URL для клієнта
-
-## Скрипти
-
-| Команда | Опис |
-|---------|------|
-| `npm run dev` | Dev-сервер |
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Dev server |
 | `npm run build` | Production build |
 | `npm run preview` | Preview production build |
 | `npm run generate` | Static generate |
 
-## Після запуску
+## Pre-launch checklist
 
+- [ ] Replace mock photos in `public/images/gallery/`
+- [ ] Update real reviews in `app/data/reviews.ts`
+- [ ] Set `IS_MOCK_DATA = false` in `app/data/mock.ts` after GBP data is confirmed
+- [ ] Confirm client inputs — [`CLIENT_QUESTIONS.md`](CLIENT_QUESTIONS.md)
 - [ ] Google Search Console + sitemap
-- [ ] Google Business Profile — оновити URL сайту
-- [ ] Реальні фото СТО в `public/images/gallery/`
-- [ ] Реальні відгуки в `app/data/reviews.ts`
-- [ ] Підтвердити mock-дані (Telegram, Viber, email) — [`CLIENT_QUESTIONS.md`](CLIENT_QUESTIONS.md)
+- [ ] Google Business Profile — update website URL and NAP
+
+## Content language
+
+| Layer | Language |
+|-------|----------|
+| Website UI & SEO copy | Ukrainian (`lang="uk"`) |
+| Code, comments, docs | English |

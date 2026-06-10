@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface Props {
-  /** Затримка появи в мс (для stagger-ефекту в сітках) */
+  /** Reveal delay in ms (stagger effect in grids) */
   delay?: number
   /** fade-up | fade-in | slide-right */
   variant?: 'fade-up' | 'fade-in' | 'slide-right'

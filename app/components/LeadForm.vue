@@ -20,6 +20,7 @@ const form = reactive({
 
 const status = ref<'idle' | 'loading' | 'success' | 'error'>('idle')
 const errorMessage = ref('')
+const consent = ref(false)
 
 async function submitForm() {
   if (form.website) return
@@ -150,10 +151,26 @@ async function submitForm() {
             {{ errorMessage }}
           </p>
 
+          <label class="flex cursor-pointer items-start gap-3 text-sm text-text-muted">
+            <input
+              v-model="consent"
+              type="checkbox"
+              required
+              class="mt-1 h-4 w-4 shrink-0 rounded border-border bg-surface text-accent focus:ring-accent"
+            >
+            <span>
+              Надсилаючи заявку, я погоджуюсь з
+              <NuxtLink to="/polityka-konfidentsiynosti" class="text-accent hover:underline">
+                Політикою конфіденційності
+              </NuxtLink>
+              та даю згоду на обробку персональних даних.
+            </span>
+          </label>
+
           <button
             type="submit"
             class="btn-primary w-full"
-            :disabled="status === 'loading'"
+            :disabled="status === 'loading' || !consent"
           >
             <UiSpinner v-if="status === 'loading'" />
             {{ status === 'loading' ? 'Надсилання...' : 'Надіслати заявку' }}

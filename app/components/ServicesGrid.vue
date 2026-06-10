@@ -11,13 +11,15 @@ const props = withDefaults(defineProps<Props>(), {
   showAllLink: false,
 })
 
+const FEATURED_SLUG = 'diagnostyka-avto-kyiv'
+
 const displayedServices = computed(() =>
   props.limit ? services.slice(0, props.limit) : services,
 )
 </script>
 
 <template>
-  <section class="section-padding">
+  <section class="section-padding bg-bg-soft">
     <div class="container-narrow">
       <UiReveal class="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
@@ -36,21 +38,13 @@ const displayedServices = computed(() =>
           v-for="(service, index) in displayedServices"
           :key="service.slug"
           :delay="index * 60"
+          :class="service.slug === FEATURED_SLUG ? 'sm:col-span-2 lg:col-span-2' : ''"
         >
-          <NuxtLink
-            :to="`/poslugy/${service.slug}`"
-            class="card group flex h-full flex-col"
-          >
-            <h3 class="text-lg font-heading uppercase tracking-wide transition-colors group-hover:text-accent">
-              {{ service.title }}
-            </h3>
-            <p class="mt-2 flex-1 text-sm text-text-muted">
-              {{ service.shortDescription }}
-            </p>
-            <p class="mt-4 text-sm font-semibold text-accent">
-              {{ service.price }}
-            </p>
-          </NuxtLink>
+          <ServiceCard
+            :service="service"
+            :index="index"
+            :featured="service.slug === FEATURED_SLUG"
+          />
         </UiReveal>
       </div>
     </div>

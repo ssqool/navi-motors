@@ -1,4 +1,4 @@
-/** Усі mock-дані позначені тут — замінити на реальні перед фінальним релізом */
+/** All mock data — replace with real client data before final release */
 export const IS_MOCK_DATA = true
 
 export const mockMeta = {

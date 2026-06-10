@@ -51,7 +51,7 @@
     @apply mt-3 max-w-2xl text-text-muted;
   }
 
-  /* Scroll reveal — лише transform + opacity (GPU) */
+  /* Scroll reveal — transform + opacity only (GPU-friendly) */
   .reveal {
     transition:
       opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
@@ -76,7 +76,7 @@
     transform: none;
   }
 
-  /* Hero — одноразова анімація при завантаженні */
+  /* Hero — one-time entrance animation */
   .hero-enter {
     opacity: 0;
     animation: hero-enter 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -88,12 +88,16 @@
     animation: hero-bg-enter 1s ease forwards;
   }
 
-  /* Індикатор завантаження / спінер */
+  .hero-bg-zoom {
+    animation: hero-bg-enter 1s ease forwards, hero-bg-zoom 14s ease-out forwards;
+  }
+
+  /* Loading spinner */
   .ui-spinner {
     animation: spin 0.65s linear infinite;
   }
 
-  /* Навігаційне підкреслення */
+  /* Nav link underline */
   .nav-link {
     @apply relative text-sm font-medium transition-colors hover:text-accent;
   }
@@ -136,6 +140,16 @@
     }
   }
 
+  @keyframes hero-bg-zoom {
+    from {
+      transform: scale(1);
+    }
+
+    to {
+      transform: scale(1.06);
+    }
+  }
+
   @keyframes spin {
     to {
       transform: rotate(360deg);
@@ -143,7 +157,7 @@
   }
 }
 
-/* Переходи між сторінками */
+/* Page transitions */
 .page-enter-active,
 .page-leave-active {
   transition: opacity 0.22s ease;
@@ -154,7 +168,7 @@
   opacity: 0;
 }
 
-/* Мобільне меню */
+/* Mobile menu */
 .menu-enter-active,
 .menu-leave-active {
   transition:
@@ -169,6 +183,19 @@
   transform: translateY(-6px);
 }
 
+.sticky-cta-enter-active,
+.sticky-cta-leave-active {
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.sticky-cta-enter-from,
+.sticky-cta-leave-to {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal,
   .reveal-fade-up,
@@ -179,15 +206,19 @@
   }
 
   .hero-enter,
-  .hero-bg-enter {
+  .hero-bg-enter,
+  .hero-bg-zoom {
     opacity: 1 !important;
     animation: none !important;
+    transform: none !important;
   }
 
   .page-enter-active,
   .page-leave-active,
   .menu-enter-active,
-  .menu-leave-active {
+  .menu-leave-active,
+  .sticky-cta-enter-active,
+  .sticky-cta-leave-active {
     transition: none !important;
   }
 

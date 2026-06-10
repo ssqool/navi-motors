@@ -1,17 +1,23 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'default' })
 
+const breadcrumbs = [
+  { name: 'Головна', path: '/' },
+  { name: 'Послуги', path: '/poslugy' },
+]
+
 useSeo({
-  title: 'Послуги Navi Motors — ремонт та обслуговування авто у Києві',
+  title: 'Послуги автосервісу у Києві — Navi Motors',
   description:
-    'Послуги Navi Motors: діагностика авто, технічне обслуговування, ремонт ходової, гальмівної системи, двигуна, трансмісії та рульового управління у Києві.',
+    'Послуги Navi Motors у Києві: діагностика авто, ТО, ремонт ходової, гальм, двигуна, трансмісії та рульового управління. Запис: 098 535 50 80.',
   path: '/poslugy',
 })
 </script>
 
 <template>
   <div>
-    <SeoJsonLd />
+    <SeoJsonLd page-type="services" :breadcrumbs="breadcrumbs" />
+    <UiBreadcrumbs :items="breadcrumbs" />
     <HeroSection
       title="Послуги автосервісу Navi Motors"
       subtitle="Navi Motors виконує діагностику, планове технічне обслуговування та ремонт авто у Києві. Працюємо з основними системами автомобіля: ходова, гальма, двигун, трансмісія, рульове управління та інші вузли."

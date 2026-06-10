@@ -8,7 +8,7 @@ export interface Review {
   service?: string
 }
 
-/** Mock-відгуки. Замінити на реальні з Google Maps після підтвердження клієнтом */
+/** Mock reviews — replace with real Google Maps reviews after client approval */
 export const reviews: Review[] = [
   {
     author: 'Олексій К.',

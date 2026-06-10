@@ -1,105 +1,96 @@
-# Питання для клієнта Navi Motors
+# Client questionnaire — Navi Motors
 
-> Зібрано автоматично. Усі mock-дані на сайті позначені в коді (`app/data/mock.ts`, `gallery.ts`, `reviews.ts`, `social-posts.ts`).
-> Після отримання відповідей — замінимо mock на реальний контент одним батчем.
+> All mock data is flagged in code (`app/data/mock.ts`, `gallery.ts`, `reviews.ts`, `social-posts.ts`).  
+> After answers are received, replace mocks in a single content batch.  
+> **Note:** The public website stays in **Ukrainian** for the Kyiv audience.
 
 ---
 
-## Контакти та канали звʼязку
+## Contact & channels
 
-1. Чи є **Telegram** на номері 098 535 50 80? Якщо так — який username або посилання?
-2. Чи є **Viber** на цьому номері?
-3. Чи потрібен **email** на сайті? Якщо так — який саме? (зараз mock: `info@navi-motors.com.ua`)
-4. Чи працюєте в **неділю**? (зараз: Пн–Сб 10:00–18:00)
-5. Чи є **перерва** в робочому дні?
+1. Confirm phone for the website: **098 535 50 80**?
+2. **Telegram** — username or link (not just phone number)?
+3. **Viber** on this number — yes/no?
+4. **Email** for the website? (current mock: `info@navi-motors.com.ua`)
+5. Confirm hours: **Mon–Sat 10:00–18:00**?
+6. Open on **Sunday**?
+7. **Lunch break** during the day?
 
 ---
 
 ## Google Business Profile
 
-6. Чи є доступ до **Google Business Profile** (Google Maps картка)? Хто має права адміністратора?
-7. Підтвердіть **точну адресу** для NAP (назва, адреса, телефон) — має збігатись на сайті і в Google.
-8. Скільки **реальних відгуків** зараз на Google Maps? (на сайті mock: 4.8 / 24 відгуки)
-9. Чи можемо використати **тексти реальних відгуків** на сайті? (потрібен дозвіл або скріни)
+8. Access to **Google Business Profile** — who is admin?
+9. Confirm **NAP** (must match site + Google):
+   - Name: **Navi Motors**
+   - Address: **vul. Vitaliya Skakuna, 26, Kyiv, 02000**
+   - Phone: **098 535 50 80**
+10. Current **Google rating** and **review count**?
+11. Permission to use **3–5 real review texts** on the website?
 
 ---
 
-## Ціни
+## Pricing
 
-10. Підтвердіть фінальні ціни «від»:
-    - Діагностика ходової — від ? грн
-    - Компʼютерна діагностика — від ? грн
-    - Заміна масла — від ? грн
-    - Заміна гальмівних колодок — від ? грн
-    - Планове ТО — від ? грн
-    - Перевірка авто перед купівлею — від ? gрн
-11. Чи показувати ціни **«після діагностики»** для складних робіт (ходова, двигун, трансмісія)?
-12. Чи є **фіксовані пакети** послуг (наприклад, «ТО базове / повне»)?
-
----
-
-## Фото та відео (критично для релізу)
-
-13. Надати **10–15 реальних фото** СТО:
-    - [ ] фасад
-    - [ ] вхід / зона прийому
-    - [ ] бокс
-    - [ ] авто на підйомнику
-    - [ ] майстер за роботою
-    - [ ] інструменти / обладнання
-    - [ ] зона очікування (якщо є)
-    - [ ] 2–3 фото «до / після» ремонту
-14. Надати **3–5 коротких відео** або посилання на пости для блоку соцмереж.
-15. Надати **лого у високій якості** (PNG/SVG):
-    - основне для hero/footer
-    - горизонтальне для header
-    - іконка для favicon
-16. Підтвердити текст під лого: **KYIV CAR SERVICE** чи **AUTO SERVICE KYIV**?
+12. Confirm “from” prices:
+    - Suspension diagnostics — from ___ UAH
+    - Computer diagnostics — from ___ UAH
+    - Oil change — from ___ UAH
+    - Brake pads — from ___ UAH
+    - Scheduled maintenance — from ___ UAH
+    - Pre-purchase inspection — from ___ UAH
+13. Keep **“after diagnostics”** for complex jobs (suspension, engine, transmission)?
+14. Any **fixed service packages** (e.g. basic / full maintenance)?
 
 ---
 
-## Соцмережі
+## Photos & video
 
-17. Підтвердити Instagram: `@_navi_motors_` — актуально?
-18. Підтвердити TikTok: `@_navimotors_` — актуально?
-19. Надати **прямі посилання на 3–6 постів** для embed на сайті:
-    - TikTok: `https://www.tiktok.com/@_navimotors_/video/XXXXXXXX`
-    - Instagram: `https://www.instagram.com/p/XXXXXXXX/` або `/reel/XXXXXXXX/`
-20. Чи можемо **embed** пости Instagram/TikTok на сайт? (технічно — так, потрібні URL конкретних постів)
-
----
-
-## Послуги та тексти
-
-21. Чи всі **8 послуг** на сайті актуальні? Щось додати / прибрати?
-22. Чи працюєте з **конкретними марками** авто (BMW, VAG, Toyota...) — варто вказати на сайті?
-23. Чи робите **евакуатор / допомога на дорозі**?
-24. Чи є **гарантія** на роботи? Якщо так — на який термін?
-25. Чи допомагаєте з **підбором і замовленням запчастин**? (зараз зазначено в перевагах)
+15. Provide **10–15 real photos**:
+    - [ ] facade / signage
+    - [ ] entrance / reception
+    - [ ] workshop / lift
+    - [ ] car on lift
+    - [ ] mechanic at work
+    - [ ] tools / equipment
+    - [ ] waiting area (if any)
+    - [ ] 2–3 before/after repair shots
+16. **Logo** in high quality (SVG or PNG): horizontal, main, favicon
+17. Tagline under logo: **KYIV CAR SERVICE** or other?
+18. **3–6 social post URLs** for the website block (Instagram / TikTok)
 
 ---
 
-## Технічне / запуск
+## Services & business info
 
-26. Який **домен** буде у сайту? (зараз placeholder: `navi-motors.com.ua`)
-27. Хто створить **Telegram Bot** для заявок з сайту? (потрібен token + chat_id)
-28. Чи потрібна **Google Analytics** чи **Plausible** для аналітики?
-29. Хто матиме доступ до **Google Search Console** після запуску?
+19. Are all **8 services** on the site correct? Add/remove anything?
+20. **Car brands** you work with most (BMW, VAG, Toyota…)?
+21. **Warranty** on work — yes/no, how many days/km?
+22. **Parts sourcing** — do you help clients order parts?
+23. **Tow truck / roadside assistance** — yes/no?
 
 ---
 
-## Швидкий чекліст для клієнта (що надіслати одним повідомленням)
+## Technical / launch
+
+24. Final **domain** (e.g. `navi-motors.com.ua`)?
+25. Who creates the **Telegram bot** for lead form (token + chat_id)?
+26. **Google Analytics** or **Plausible** needed?
+27. Who manages **Search Console** after launch?
+
+---
+
+## Quick checklist (send in one message)
 
 ```
-□ 10–15 фото СТО
-□ 3–5 відео або посилання на пости
-□ Лого (3 варіанти)
-□ Підтвердження цін «від»
-□ Підтвердження графіку роботи
-□ Telegram / Viber — так/ні + посилання
-□ Email (якщо потрібен)
-□ Доступ до Google Business Profile
-□ 3–5 текстів реальних відгуків (або дозвіл використати з Google)
-□ Домен для сайту
-□ Telegram Bot token для заявок
+□ 10–15 workshop photos
+□ Logo files (SVG/PNG)
+□ Confirmed “from” prices
+□ Confirmed working hours
+□ Telegram / Viber links
+□ Email (if needed)
+□ Google Business Profile access
+□ 3–5 real Google review texts + rating/count
+□ Domain name
+□ Telegram bot token for leads
 ```

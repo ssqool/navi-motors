@@ -6,7 +6,7 @@ export interface GalleryImage {
   category: 'facade' | 'box' | 'work' | 'tools' | 'waiting' | 'before-after'
 }
 
-/** Локальні фото СТО (public/images/gallery/). Частина — реальні знімки з Instagram/TikTok Navi Motors. */
+/** Local workshop photos (public/images/gallery/). Some are real shots from Navi Motors social media. */
 export const galleryImages: GalleryImage[] = [
   {
     id: 'facade',
@@ -99,7 +99,7 @@ export const heroImage = {
   alt: 'Автосервіс Navi Motors у Києві',
 }
 
-/** Hero-зображення для SEO-сторінок послуг */
+/** Hero images for service SEO pages */
 export const serviceHeroImages: Record<string, string> = {
   'diagnostyka-avto-kyiv': '/images/gallery/mercedes-diagnostics.jpg',
   'tehnichne-obslugovuvannia-kyiv': '/images/gallery/tools.jpg',

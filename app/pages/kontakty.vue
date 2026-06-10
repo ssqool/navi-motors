@@ -3,20 +3,26 @@ import { siteConfig } from '~/data/site'
 
 definePageMeta({ layout: 'default' })
 
+const breadcrumbs = [
+  { name: 'Головна', path: '/' },
+  { name: 'Контакти', path: '/kontakty' },
+]
+
 useSeo({
-  title: 'Контакти Navi Motors — СТО на Віталія Скакуна, 26 у Києві',
+  title: 'Контакти Navi Motors — СТО на Віталія Скакуна, 26, Київ',
   description:
-    'Контакти Navi Motors: вулиця Віталія Скакуна, 26, Київ, 02000. Телефон 098 535 50 80. Запис на ремонт авто, діагностику та технічне обслуговування.',
+    'Контакти автосервісу Navi Motors: вул. Віталія Скакуна, 26, Київ, 02000. Телефон 098 535 50 80. Графік Пн–Сб 10:00–18:00. Запис на діагностику та ремонт авто.',
   path: '/kontakty',
 })
 </script>
 
 <template>
   <div>
-    <SeoJsonLd />
+    <SeoJsonLd page-type="contact" :breadcrumbs="breadcrumbs" />
+    <UiBreadcrumbs :items="breadcrumbs" />
     <HeroSection
       title="Контакти Navi Motors"
-      subtitle="Запишіться на діагностику або ремонт. Ми на вул. Віталія Скакуна, 26 у Києві."
+      subtitle="Запишіться на діагностику або ремонт авто у Києві. Ми на вул. Віталія Скакуна, 26."
       :show-cta="false"
       compact
     />
@@ -57,27 +63,27 @@ useSeo({
 
         <UiReveal :delay="80">
           <div class="mt-8 flex flex-wrap gap-4">
-          <UiPhoneButton />
-          <UiMapButton variant="primary" />
-          <a
-            :href="siteConfig.instagram"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn-secondary"
-          >
-            Написати в Instagram
-          </a>
-          <a
-            :href="siteConfig.tiktok"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn-secondary"
-          >
-            TikTok
-          </a>
-          <a href="#lead-form" class="btn-primary">
-            Записатись онлайн
-          </a>
+            <UiPhoneButton />
+            <UiMapButton variant="primary" />
+            <a
+              :href="siteConfig.instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-secondary"
+            >
+              Написати в Instagram
+            </a>
+            <a
+              :href="siteConfig.tiktok"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-secondary"
+            >
+              TikTok
+            </a>
+            <a href="#lead-form" class="btn-primary">
+              Записатись онлайн
+            </a>
           </div>
         </UiReveal>
       </div>

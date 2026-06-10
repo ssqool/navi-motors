@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { prices, priceDisclaimer } from '~/data/prices'
+
+const featuredPrices = computed(() => prices.slice(0, 4))
+const otherPrices = computed(() => prices.slice(4))
 </script>
 
 <template>
-  <section class="section-padding bg-bg-soft">
+  <section class="section-padding">
     <div class="container-narrow">
       <UiReveal>
         <h2 class="section-title">Орієнтовні ціни</h2>
@@ -12,18 +15,31 @@ import { prices, priceDisclaimer } from '~/data/prices'
         </p>
       </UiReveal>
 
-      <UiReveal :delay="80">
-        <div class="mt-10 overflow-hidden rounded-xl border border-border">
+      <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <UiReveal
+          v-for="(item, index) in featuredPrices"
+          :key="item.service"
+          :delay="index * 50"
+        >
+          <div class="card h-full text-center">
+            <p class="text-sm text-text-muted">{{ item.service }}</p>
+            <p class="mt-3 text-2xl font-heading text-accent">{{ item.price }}</p>
+          </div>
+        </UiReveal>
+      </div>
+
+      <UiReveal :delay="100">
+        <div class="mt-8 overflow-hidden rounded-xl border border-border">
           <table class="w-full text-left text-sm">
             <thead class="bg-surface">
               <tr>
-                <th class="px-6 py-4 font-heading uppercase tracking-wide text-text-soft">Послуга</th>
+                <th class="px-6 py-4 font-heading uppercase tracking-wide text-text-soft">Інші послуги</th>
                 <th class="px-6 py-4 font-heading uppercase tracking-wide text-text-soft">Ціна</th>
               </tr>
             </thead>
             <tbody>
               <tr
-                v-for="(item, index) in prices"
+                v-for="(item, index) in otherPrices"
                 :key="item.service"
                 class="border-t border-border transition-colors hover:bg-surface/50"
                 :class="index % 2 === 0 ? 'bg-bg' : 'bg-bg-soft'"
