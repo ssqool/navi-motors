@@ -17,6 +17,15 @@ function isActive(path: string) {
 watch(() => route.path, () => {
   isMenuOpen.value = false
 })
+
+watch(isMenuOpen, (open) => {
+  if (!import.meta.client) return
+  document.body.style.overflow = open ? 'hidden' : ''
+})
+
+onUnmounted(() => {
+  if (import.meta.client) document.body.style.overflow = ''
+})
 </script>
 
 <template>
@@ -63,32 +72,44 @@ watch(() => route.path, () => {
       </div>
     </div>
 
-    <Transition name="menu">
-      <div
-        v-if="isMenuOpen"
-        id="mobile-menu"
-        class="border-t border-border bg-bg-soft md:hidden"
-      >
-        <nav class="container-narrow flex flex-col gap-4 py-4" aria-label="Мобільна навігація">
-          <NuxtLink
-            v-for="link in navLinks"
-            :key="link.to"
-            :to="link.to"
-            class="text-base font-medium transition-colors hover:text-accent"
-            :class="isActive(link.to) ? 'text-accent' : 'text-text-soft'"
-          >
-            {{ link.label }}
-          </NuxtLink>
-          <UiBookingButton class="w-full" />
-          <UiPhoneButton variant="secondary" class="w-full" />
-          <a
-            :href="`tel:${siteConfig.phone}`"
-            class="text-center text-sm text-text-muted"
-          >
-            {{ siteConfig.phoneDisplay }}
-          </a>
-        </nav>
-      </div>
-    </Transition>
+    <Teleport to="body">
+      <Transition name="menu-backdrop">
+        <button
+          v-if="isMenuOpen"
+          type="button"
+          class="fixed inset-0 top-16 z-[90] bg-bg/80 backdrop-blur-sm md:hidden"
+          aria-label="Закрити меню"
+          @click="isMenuOpen = false"
+        />
+      </Transition>
+
+      <Transition name="menu">
+        <div
+          v-if="isMenuOpen"
+          id="mobile-menu"
+          class="fixed inset-x-0 top-16 z-[100] max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-border bg-bg-soft shadow-lg md:hidden"
+        >
+          <nav class="container-narrow flex flex-col gap-4 py-4" aria-label="Мобільна навігація">
+            <NuxtLink
+              v-for="link in navLinks"
+              :key="link.to"
+              :to="link.to"
+              class="text-base font-medium transition-colors hover:text-accent"
+              :class="isActive(link.to) ? 'text-accent' : 'text-text-soft'"
+            >
+              {{ link.label }}
+            </NuxtLink>
+            <UiBookingButton class="w-full" />
+            <UiPhoneButton variant="secondary" class="w-full" />
+            <a
+              :href="`tel:${siteConfig.phone}`"
+              class="text-center text-sm text-text-muted"
+            >
+              {{ siteConfig.phoneDisplay }}
+            </a>
+          </nav>
+        </div>
+      </Transition>
+    </Teleport>
   </header>
 </template>

@@ -4,7 +4,7 @@ import { services } from '~/data/services'
 </script>
 
 <template>
-  <footer class="border-t border-border bg-bg-soft">
+  <footer data-site-footer class="border-t border-border bg-bg-soft">
     <div class="container-narrow section-padding pb-8">
       <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div>

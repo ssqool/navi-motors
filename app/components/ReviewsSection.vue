@@ -48,9 +48,9 @@ const reviewsUrl = computed(() =>
               <span v-if="review.service" class="text-xs text-text-muted">{{ review.service }}</span>
             </div>
             <p class="text-sm text-text-soft">"{{ review.text }}"</p>
-            <footer class="mt-4 text-xs text-text-muted">
+            <p class="mt-4 text-xs text-text-muted">
               {{ review.author }} · {{ review.date }}
-            </footer>
+            </p>
           </article>
         </UiReveal>
       </div>

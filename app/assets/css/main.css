@@ -169,18 +169,27 @@
 }
 
 /* Mobile menu */
+.menu-backdrop-enter-active,
+.menu-backdrop-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.menu-backdrop-enter-from,
+.menu-backdrop-leave-to {
+  opacity: 0;
+}
+
 .menu-enter-active,
 .menu-leave-active {
   transition:
     opacity 0.2s ease,
     transform 0.2s ease;
-  overflow: hidden;
 }
 
 .menu-enter-from,
 .menu-leave-to {
   opacity: 0;
-  transform: translateY(-6px);
+  transform: translateY(-8px);
 }
 
 .sticky-cta-enter-active,
