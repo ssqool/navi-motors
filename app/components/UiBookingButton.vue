@@ -1,16 +1,25 @@
 <script setup lang="ts">
+import type { AnalyticsLocation } from '~/types/analytics'
+
 interface Props {
   variant?: 'primary' | 'secondary'
   size?: 'sm' | 'md'
   class?: string
+  location?: AnalyticsLocation | string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   variant: 'primary',
   size: 'sm',
+  location: 'unknown',
 })
 
 const { bookingTo } = useBookingLink()
+const { trackBookingClick } = useAnalytics()
+
+function onClick() {
+  trackBookingClick(props.location)
+}
 </script>
 
 <template>
@@ -24,6 +33,7 @@ const { bookingTo } = useBookingLink()
       props.size === 'sm' ? 'px-4 py-2 text-sm' : 'px-6 py-3 text-sm',
       props.class,
     ]"
+    @click="onClick"
   >
     Записатись
   </NuxtLink>

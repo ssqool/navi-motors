@@ -78,8 +78,8 @@ onUnmounted(() => {
       aria-label="Швидкий запис"
     >
       <div class="container-narrow flex gap-3">
-        <UiPhoneButton variant="secondary" class="w-full flex-1" />
-        <UiBookingButton class="w-full flex-1" />
+        <UiPhoneButton variant="secondary" class="w-full flex-1" location="sticky_bar" />
+        <UiBookingButton class="w-full flex-1" location="sticky_bar" />
       </div>
     </div>
   </Transition>

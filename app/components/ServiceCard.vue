@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import type { Service } from '~/data/services'
 
-defineProps<{
+const props = defineProps<{
   service: Service
   featured?: boolean
   index?: number
 }>()
+
+const { trackServiceClick } = useAnalytics()
+
+function onClick() {
+  trackServiceClick(props.service.slug, props.service.title, 'services_grid')
+}
 </script>
 
 <template>
@@ -13,6 +19,7 @@ defineProps<{
     :to="`/poslugy/${service.slug}`"
     class="card group relative flex h-full flex-col overflow-hidden"
     :class="featured ? 'border-accent/40 bg-surface ring-1 ring-accent/20' : ''"
+    @click="onClick"
   >
     <span
       v-if="featured"

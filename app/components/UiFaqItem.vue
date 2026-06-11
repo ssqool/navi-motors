@@ -1,12 +1,19 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   question: string
   answer: string
 }>()
+
+const { trackFaqExpand } = useAnalytics()
+
+function onToggle(event: Event) {
+  const details = event.target as HTMLDetailsElement
+  if (details.open) trackFaqExpand(props.question)
+}
 </script>
 
 <template>
-  <details class="card-static group">
+  <details class="card-static group" @toggle="onToggle">
     <summary class="faq-summary">
       {{ question }}
       <svg

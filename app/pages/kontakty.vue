@@ -14,6 +14,18 @@ useSeo({
     'Контакти автосервісу Navi Motors: вул. Віталія Скакуна, 26, Київ, 02000. Телефон 098 535 50 80. Графік Пн–Сб 10:00–18:00. Запис на діагностику та ремонт авто.',
   path: '/kontakty',
 })
+
+const { trackPhoneClick, trackBookingClick, trackOutboundClick } = useAnalytics()
+
+function onContactLinkClick(item: { type: string, title: string, href?: string }) {
+  if (item.type === 'phone') {
+    trackPhoneClick('contacts_page')
+    return
+  }
+  if (item.href) {
+    trackOutboundClick(item.title.toLowerCase(), item.href, 'contacts_page')
+  }
+}
 </script>
 
 <template>
@@ -54,6 +66,7 @@ useSeo({
                 :rel="item.type === 'external' ? 'noopener noreferrer' : undefined"
                 class="mt-2 block transition-colors hover:underline"
                 :class="item.type === 'phone' ? 'text-xl text-accent' : 'text-accent'"
+                @click="onContactLinkClick(item)"
               >
                 {{ item.content }}
               </a>
@@ -63,13 +76,14 @@ useSeo({
 
         <UiReveal :delay="80">
           <div class="mt-8 flex flex-wrap gap-4">
-            <UiPhoneButton />
-            <UiMapButton variant="primary" />
+            <UiPhoneButton location="contacts_page" />
+            <UiMapButton variant="primary" location="contacts_page" />
             <a
               :href="siteConfig.instagram"
               target="_blank"
               rel="noopener noreferrer"
               class="btn-secondary"
+              @click="trackOutboundClick('instagram', siteConfig.instagram, 'contacts_page')"
             >
               Написати в Instagram
             </a>
@@ -78,10 +92,11 @@ useSeo({
               target="_blank"
               rel="noopener noreferrer"
               class="btn-secondary"
+              @click="trackOutboundClick('tiktok', siteConfig.tiktok, 'contacts_page')"
             >
               TikTok
             </a>
-            <a href="#lead-form" class="btn-primary">
+            <a href="#lead-form" class="btn-primary" @click="trackBookingClick('contacts_page')">
               Записатись онлайн
             </a>
           </div>

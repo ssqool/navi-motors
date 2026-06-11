@@ -1,13 +1,22 @@
 <script setup lang="ts">
+import type { AnalyticsLocation } from '~/types/analytics'
 import { siteConfig } from '~/data/site'
 
 interface Props {
   variant?: 'primary' | 'secondary'
+  location?: AnalyticsLocation | string
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   variant: 'secondary',
+  location: 'unknown',
 })
+
+const { trackMapClick } = useAnalytics()
+
+function onClick() {
+  trackMapClick(props.location)
+}
 </script>
 
 <template>
@@ -21,6 +30,7 @@ withDefaults(defineProps<Props>(), {
         ? 'bg-accent text-white hover:bg-accent-hover focus:ring-accent'
         : 'border border-border bg-transparent text-text hover:bg-surface focus:ring-border'
     "
+    @click="onClick"
   >
     Прокласти маршрут
   </a>

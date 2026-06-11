@@ -9,6 +9,7 @@ const navLinks = [
 
 const route = useRoute()
 const isMenuOpen = ref(false)
+const { trackPhoneClick } = useAnalytics()
 
 function isActive(path: string) {
   return route.path === path || route.path.startsWith(`${path}/`)
@@ -49,10 +50,10 @@ onUnmounted(() => {
       </nav>
 
       <div class="flex items-center gap-2 sm:gap-3">
-        <UiBookingButton class="hidden sm:inline-flex" />
-        <UiPhoneButton variant="secondary" size="sm" class="hidden md:inline-flex" />
+        <UiBookingButton class="hidden sm:inline-flex" location="header" />
+        <UiPhoneButton variant="secondary" size="sm" class="hidden md:inline-flex" location="header" />
 
-        <UiBookingButton size="sm" class="sm:hidden" />
+        <UiBookingButton size="sm" class="sm:hidden" location="header" />
 
         <button
           type="button"
@@ -99,11 +100,12 @@ onUnmounted(() => {
             >
               {{ link.label }}
             </NuxtLink>
-            <UiBookingButton class="w-full" />
-            <UiPhoneButton variant="secondary" class="w-full" />
+            <UiBookingButton class="w-full" location="header_mobile_menu" />
+            <UiPhoneButton variant="secondary" class="w-full" location="header_mobile_menu" />
             <a
               :href="`tel:${siteConfig.phone}`"
               class="text-center text-sm text-text-muted"
+              @click="trackPhoneClick('header_mobile_menu')"
             >
               {{ siteConfig.phoneDisplay }}
             </a>

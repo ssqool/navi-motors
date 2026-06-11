@@ -80,7 +80,7 @@ export const privacyPolicy = {
     {
       title: '9. Cookies',
       paragraphs: [
-        'Сайт може використовувати cookies для коректної роботи та аналітики (якщо підключено Google Analytics або Plausible). Ви можете обмежити cookies у налаштуваннях браузера.',
+        'Сайт може використовувати cookies для коректної роботи та аналітики (якщо підключено Google Analytics). Ви можете обмежити cookies у налаштуваннях браузера.',
       ],
     },
     {

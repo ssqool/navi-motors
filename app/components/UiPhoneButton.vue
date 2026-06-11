@@ -1,16 +1,25 @@
 <script setup lang="ts">
+import type { AnalyticsLocation } from '~/types/analytics'
 import { siteConfig } from '~/data/site'
 
 interface Props {
   variant?: 'primary' | 'secondary'
   size?: 'sm' | 'md'
   class?: string
+  location?: AnalyticsLocation | string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   variant: 'primary',
   size: 'md',
+  location: 'unknown',
 })
+
+const { trackPhoneClick } = useAnalytics()
+
+function onClick() {
+  trackPhoneClick(props.location)
+}
 </script>
 
 <template>
@@ -24,6 +33,7 @@ const props = withDefaults(defineProps<Props>(), {
       props.size === 'sm' ? 'px-4 py-2 text-sm' : 'px-6 py-3 text-sm',
       props.class,
     ]"
+    @click="onClick"
   >
     Подзвонити
   </a>

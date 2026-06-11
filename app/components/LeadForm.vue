@@ -21,6 +21,15 @@ const form = reactive({
 const status = ref<'idle' | 'loading' | 'success' | 'error'>('idle')
 const errorMessage = ref('')
 const consent = ref(false)
+const formStarted = ref(false)
+
+const { trackFormStart, trackLeadSubmit, trackFormError, trackPhoneClick } = useAnalytics()
+
+function onFormInteraction() {
+  if (formStarted.value) return
+  formStarted.value = true
+  trackFormStart(props.sourcePage)
+}
 
 async function submitForm() {
   if (form.website) return
@@ -41,6 +50,7 @@ async function submitForm() {
       },
     })
     status.value = 'success'
+    trackLeadSubmit(props.sourcePage)
     form.name = ''
     form.phone = ''
     form.car = ''
@@ -50,6 +60,7 @@ async function submitForm() {
   catch (error: unknown) {
     status.value = 'error'
     errorMessage.value = error instanceof Error ? error.message : 'Не вдалося надіслати заявку. Спробуйте ще раз або зателефонуйте нам.'
+    trackFormError(props.sourcePage, errorMessage.value)
   }
 }
 </script>
@@ -62,7 +73,11 @@ async function submitForm() {
           <h2 class="section-title text-center">Записатись на ремонт</h2>
           <p class="section-subtitle mx-auto text-center">
             Залиште заявку — ми звʼяжемось з вами найближчим часом. Або зателефонуйте:
-            <a :href="`tel:${siteConfig.phone}`" class="text-accent hover:underline">{{ siteConfig.phoneDisplay }}</a>
+            <a
+              :href="`tel:${siteConfig.phone}`"
+              class="text-accent hover:underline"
+              @click="trackPhoneClick('lead_form_inline_phone')"
+            >{{ siteConfig.phoneDisplay }}</a>
           </p>
         </UiReveal>
 
@@ -74,7 +89,7 @@ async function submitForm() {
           </div>
         </Transition>
 
-        <form v-if="status !== 'success'" class="mt-8 space-y-4" @submit.prevent="submitForm">
+        <form v-if="status !== 'success'" class="mt-8 space-y-4" @submit.prevent="submitForm" @focusin="onFormInteraction">
           <div class="grid gap-4 sm:grid-cols-2">
             <div>
               <label for="name" class="mb-1 block text-sm text-text-muted">Імʼя *</label>

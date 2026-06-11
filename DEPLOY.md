@@ -7,7 +7,7 @@
   - `NUXT_PUBLIC_SITE_URL` = `https://your-domain.com.ua`
   - `NUXT_TELEGRAM_BOT_TOKEN` = bot token
   - `NUXT_TELEGRAM_CHAT_ID` = chat ID
-  - `NUXT_PUBLIC_GA_ID` or `NUXT_PUBLIC_PLAUSIBLE_DOMAIN` (optional)
+  - `NUXT_PUBLIC_GA_ID` = client's GA4 Measurement ID `G-…` (optional, see `docs/ANALYTICS.md`)
 - [ ] Deploy — SSL is enabled automatically
 - [ ] Add custom domain in Vercel → Settings → Domains
 - [ ] Update `NUXT_PUBLIC_SITE_URL` to the final domain and redeploy

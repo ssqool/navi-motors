@@ -38,8 +38,7 @@ Open [http://localhost:3000](http://localhost:3000)
 | `NUXT_TELEGRAM_BOT_TOKEN` | Telegram bot token (server-only) |
 | `NUXT_TELEGRAM_CHAT_ID` | Chat ID for lead notifications (server-only) |
 | `NUXT_META_ACCESS_TOKEN` | Meta oEmbed token (optional) |
-| `NUXT_PUBLIC_GA_ID` | Google Analytics ID (optional) |
-| `NUXT_PUBLIC_PLAUSIBLE_DOMAIN` | Plausible domain (optional) |
+| `NUXT_PUBLIC_GA_ID` | Google Analytics 4 Measurement ID, e.g. `G-XXXXXXXXXX` (optional, free) |
 
 > **Never commit `.env`.** Only `.env.example` belongs in the repo.
 
@@ -48,7 +47,7 @@ Open [http://localhost:3000](http://localhost:3000)
 ```
 app/
   components/   # UI components
-  composables/  # useSeo, useReveal, useStructuredData, useBookingLink
+  composables/  # useSeo, useReveal, useStructuredData, useBookingLink, useAnalytics
   data/         # Site content (services, prices, gallery, reviews) — Ukrainian
   pages/        # Routes
 public/
@@ -66,6 +65,10 @@ See [`DEPLOY.md`](DEPLOY.md) for the full checklist.
 2. Add env vars from `.env.example`
 3. Deploy — SSL is automatic
 4. Set `NUXT_PUBLIC_SITE_URL` to your production domain and redeploy
+
+## Analytics (GA4)
+
+See [`docs/ANALYTICS.md`](docs/ANALYTICS.md) — client setup in 3 steps, free Google Analytics 4.
 
 ## Scripts
 

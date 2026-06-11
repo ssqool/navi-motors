@@ -30,6 +30,12 @@ const displayTitle = computed(() => preview.value?.title || props.post.caption)
 const platformLabel = computed(() =>
   props.post.platform === 'instagram' ? 'Instagram' : 'TikTok',
 )
+
+const { trackOutboundClick } = useAnalytics()
+
+function onClick() {
+  trackOutboundClick(props.post.platform, props.post.postUrl, 'social_card')
+}
 </script>
 
 <template>
@@ -38,6 +44,7 @@ const platformLabel = computed(() =>
     target="_blank"
     rel="noopener noreferrer"
     class="group block overflow-hidden rounded-xl border border-border bg-surface transition-colors hover:border-accent/40"
+    @click="onClick"
   >
     <div class="relative aspect-square overflow-hidden bg-bg-soft">
       <img

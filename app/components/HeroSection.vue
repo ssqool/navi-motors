@@ -18,6 +18,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const backgroundImage = computed(() => props.image ?? heroImage.src)
+
+const { trackPhoneClick, trackBookingClick } = useAnalytics()
 </script>
 
 <template>
@@ -70,6 +72,7 @@ const backgroundImage = computed(() => props.image ?? heroImage.src)
           <a
             :href="`tel:${siteConfig.phone}`"
             class="inline-flex items-center gap-2 rounded-xl border border-border bg-surface/80 px-3 py-2 text-sm text-text-soft backdrop-blur-sm transition-colors hover:border-accent/40 hover:text-accent"
+            @click="trackPhoneClick('hero_trust_line')"
           >
             <svg class="h-4 w-4 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -83,11 +86,11 @@ const backgroundImage = computed(() => props.image ?? heroImage.src)
           class="hero-enter mt-8 flex flex-wrap gap-4"
           style="--hero-delay: 200ms"
         >
-          <a href="#lead-form" class="btn-primary">
+          <a href="#lead-form" class="btn-primary" @click="trackBookingClick('hero')">
             Записатись на ремонт
           </a>
-          <UiPhoneButton variant="secondary" />
-          <UiMapButton variant="secondary" />
+          <UiPhoneButton variant="secondary" location="hero" />
+          <UiMapButton variant="secondary" location="hero" />
         </div>
       </div>
     </div>

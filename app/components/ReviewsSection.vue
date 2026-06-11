@@ -5,6 +5,8 @@ import { siteConfig } from '~/data/site'
 const reviewsUrl = computed(() =>
   siteConfig.googleReviewsUrl || siteConfig.googleMaps,
 )
+
+const { trackOutboundClick } = useAnalytics()
 </script>
 
 <template>
@@ -62,6 +64,7 @@ const reviewsUrl = computed(() =>
             target="_blank"
             rel="noopener noreferrer"
             class="btn-secondary"
+            @click="trackOutboundClick('google_reviews', reviewsUrl, 'reviews_section')"
           >
             Дивитись всі відгуки в Google
           </a>
@@ -70,6 +73,7 @@ const reviewsUrl = computed(() =>
             target="_blank"
             rel="noopener noreferrer"
             class="btn-primary"
+            @click="trackOutboundClick('google_reviews_write', reviewsUrl, 'reviews_section')"
           >
             Залишити відгук
           </a>

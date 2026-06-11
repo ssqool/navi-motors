@@ -84,8 +84,8 @@ useSeo({
             {{ siteConfig.address }} · {{ siteConfig.workingHours }}
           </p>
           <div class="mt-8 flex flex-wrap justify-center gap-4">
-            <UiBookingButton />
-            <UiPhoneButton variant="secondary" />
+            <UiBookingButton location="about_page" />
+            <UiPhoneButton variant="secondary" location="about_page" />
             <NuxtLink to="/poslugy" class="btn-secondary">
               Наші послуги
             </NuxtLink>

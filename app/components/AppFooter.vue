@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { siteConfig } from '~/data/site'
 import { services } from '~/data/services'
+
+const { trackPhoneClick, trackBookingClick } = useAnalytics()
 </script>
 
 <template>
@@ -23,7 +25,7 @@ import { services } from '~/data/services'
             <li><NuxtLink to="/poslugy" class="hover:text-accent">Послуги</NuxtLink></li>
             <li><NuxtLink to="/pro-nas" class="hover:text-accent">Про нас</NuxtLink></li>
             <li><NuxtLink to="/kontakty" class="hover:text-accent">Контакти</NuxtLink></li>
-            <li><NuxtLink to="/#lead-form" class="hover:text-accent">Запис на ремонт</NuxtLink></li>
+            <li><NuxtLink to="/#lead-form" class="hover:text-accent" @click="trackBookingClick('footer')">Запис на ремонт</NuxtLink></li>
           </ul>
         </div>
 
@@ -47,7 +49,11 @@ import { services } from '~/data/services'
           <address class="space-y-2 text-sm not-italic text-text-muted">
             <p>{{ siteConfig.address }}</p>
             <p>
-              <a :href="`tel:${siteConfig.phone}`" class="hover:text-accent">
+              <a
+                :href="`tel:${siteConfig.phone}`"
+                class="hover:text-accent"
+                @click="trackPhoneClick('footer')"
+              >
                 {{ siteConfig.phoneDisplay }}
               </a>
             </p>

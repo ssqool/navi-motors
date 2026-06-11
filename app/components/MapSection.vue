@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { siteConfig } from '~/data/site'
+
+const { trackPhoneClick, trackMapClick, trackOutboundClick } = useAnalytics()
 </script>
 
 <template>
@@ -21,7 +23,11 @@ import { siteConfig } from '~/data/site'
             </div>
             <div class="card">
               <h3 class="text-sm font-heading uppercase tracking-wide text-text-muted">Телефон</h3>
-              <a :href="`tel:${siteConfig.phone}`" class="mt-2 block text-lg text-accent transition-colors hover:underline">
+              <a
+                :href="`tel:${siteConfig.phone}`"
+                class="mt-2 block text-lg text-accent transition-colors hover:underline"
+                @click="trackPhoneClick('map_section')"
+              >
                 {{ siteConfig.phoneDisplay }}
               </a>
             </div>
@@ -30,17 +36,18 @@ import { siteConfig } from '~/data/site'
               <p class="mt-2 text-text-soft">{{ siteConfig.workingHours }}</p>
             </div>
             <div class="flex flex-wrap gap-4">
-              <UiPhoneButton />
-              <UiMapButton />
+              <UiPhoneButton location="map_section" />
+              <UiMapButton location="map_section" />
               <a
                 :href="siteConfig.telegram"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn-secondary"
+                @click="trackOutboundClick('telegram', siteConfig.telegram, 'map_section')"
               >
                 Telegram
               </a>
-              <a :href="siteConfig.viber" class="btn-secondary">
+              <a :href="siteConfig.viber" class="btn-secondary" @click="trackOutboundClick('viber', siteConfig.viber, 'map_section')">
                 Viber
               </a>
               <a
@@ -48,6 +55,7 @@ import { siteConfig } from '~/data/site'
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn-secondary"
+                @click="trackOutboundClick('instagram', siteConfig.instagram, 'map_section')"
               >
                 Instagram
               </a>
@@ -56,6 +64,7 @@ import { siteConfig } from '~/data/site'
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn-secondary"
+                @click="trackOutboundClick('tiktok', siteConfig.tiktok, 'map_section')"
               >
                 TikTok
               </a>

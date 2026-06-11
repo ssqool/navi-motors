@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { siteConfig } from '~/data/site'
 import { socialPosts } from '~/data/social-posts'
+
+const { trackOutboundClick } = useAnalytics()
 </script>
 
 <template>
@@ -30,6 +32,7 @@ import { socialPosts } from '~/data/social-posts'
             target="_blank"
             rel="noopener noreferrer"
             class="btn-primary"
+            @click="trackOutboundClick('instagram', siteConfig.instagram, 'social_section')"
           >
             Instagram
           </a>
@@ -38,6 +41,7 @@ import { socialPosts } from '~/data/social-posts'
             target="_blank"
             rel="noopener noreferrer"
             class="btn-secondary"
+            @click="trackOutboundClick('tiktok', siteConfig.tiktok, 'social_section')"
           >
             TikTok
           </a>
