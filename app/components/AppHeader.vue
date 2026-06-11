@@ -23,7 +23,7 @@ watch(() => route.path, () => {
   <header class="sticky top-0 z-50 border-b border-border bg-bg/95 backdrop-blur-md">
     <div class="container-narrow flex h-16 items-center justify-between gap-3 md:h-20">
       <NuxtLink to="/" class="flex shrink-0 items-center gap-3 transition-opacity hover:opacity-80" aria-label="Navi Motors — головна">
-        <img src="/images/logo/logo-horizontal.svg" alt="Navi Motors" class="h-8 md:h-10" width="160" height="40">
+        <img src="/logo.svg" alt="Navi Motors" class="h-10 w-10 md:h-11 md:w-11" width="44" height="44">
       </NuxtLink>
 
       <nav class="hidden items-center gap-6 lg:gap-8 md:flex" aria-label="Головна навігація">

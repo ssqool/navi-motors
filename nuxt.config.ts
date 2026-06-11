@@ -38,7 +38,8 @@ export default defineNuxtConfig({
         { name: 'apple-mobile-web-app-title', content: 'Navi Motors' },
       ],
       link: [
-        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' },
+        { rel: 'apple-touch-icon', href: '/images/logo/logo-192.png' },
         { rel: 'manifest', href: '/site.webmanifest' },
       ],
     },

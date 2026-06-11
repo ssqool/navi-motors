@@ -8,7 +8,7 @@ import { services } from '~/data/services'
     <div class="container-narrow section-padding pb-8">
       <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <img src="/images/logo/logo-main.svg" alt="Navi Motors — автосервіс у Києві" class="mb-4 h-12" width="180" height="48">
+          <img src="/logo.svg" alt="Navi Motors — автосервіс у Києві" class="mb-4 h-24 w-24" width="96" height="96">
           <p class="text-sm text-text-muted">
             {{ siteConfig.tagline }}. Діагностика, ТО та ремонт авто у Києві на вул. Віталія Скакуна, 26.
           </p>

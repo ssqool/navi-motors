@@ -18,7 +18,7 @@ export function useSeo(options: SeoOptions) {
   const siteUrl = (config.public.siteUrl as string).replace(/\/$/, '')
   const path = options.path ?? '/'
   const url = `${siteUrl}${path === '/' ? '' : path}`
-  const image = options.image ?? `${siteUrl}/images/og/navi-motors.svg`
+  const image = options.image ?? `${siteUrl}/images/og/navi-motors.png`
   const robots = options.noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
 
   useSeoMeta({

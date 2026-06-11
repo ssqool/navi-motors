@@ -52,7 +52,8 @@ app/
   data/         # Site content (services, prices, gallery, reviews) — Ukrainian
   pages/        # Routes
 public/
-  images/       # Logo, gallery, social thumbnails
+  logo.svg      # Brand logo (SVG, used in header/footer)
+  images/       # Gallery, social thumbnails, logo PNG fallbacks
 server/
   api/          # lead.post, social-preview, sitemap urls
 ```
