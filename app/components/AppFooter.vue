@@ -2,7 +2,12 @@
 import { siteConfig } from '~/data/site'
 import { services } from '~/data/services'
 
-const { trackPhoneClick, trackBookingClick } = useAnalytics()
+const { trackPhoneClick, trackBookingClick, trackOutboundClick } = useAnalytics()
+
+const socialLinks = [
+  { platform: 'instagram' as const, href: siteConfig.instagram, label: siteConfig.instagramHandle },
+  { platform: 'tiktok' as const, href: siteConfig.tiktok, label: siteConfig.tiktokHandle },
+]
 </script>
 
 <template>
@@ -14,6 +19,20 @@ const { trackPhoneClick, trackBookingClick } = useAnalytics()
           <p class="text-sm text-text-muted">
             {{ siteConfig.tagline }}. Діагностика, ТО та ремонт авто у Києві на вул. Віталія Скакуна, 26.
           </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a
+              v-for="item in socialLinks"
+              :key="item.platform"
+              :href="item.href"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="link-focus inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-surface text-text-soft transition-colors hover:border-accent/40 hover:text-accent"
+              :aria-label="item.label"
+              @click="trackOutboundClick(item.platform, item.href, 'footer')"
+            >
+              <UiSocialIcon :platform="item.platform" class="h-5 w-5" />
+            </a>
+          </div>
         </div>
 
         <div>
@@ -21,11 +40,11 @@ const { trackPhoneClick, trackBookingClick } = useAnalytics()
             Навігація
           </h3>
           <ul class="space-y-2 text-sm text-text-muted">
-            <li><NuxtLink to="/" class="hover:text-accent">Головна</NuxtLink></li>
-            <li><NuxtLink to="/poslugy" class="hover:text-accent">Послуги</NuxtLink></li>
-            <li><NuxtLink to="/pro-nas" class="hover:text-accent">Про нас</NuxtLink></li>
-            <li><NuxtLink to="/kontakty" class="hover:text-accent">Контакти</NuxtLink></li>
-            <li><NuxtLink to="/#lead-form" class="hover:text-accent" @click="trackBookingClick('footer')">Запис на ремонт</NuxtLink></li>
+            <li><NuxtLink to="/" class="link-focus hover:text-accent">Головна</NuxtLink></li>
+            <li><NuxtLink to="/poslugy" class="link-focus hover:text-accent">Послуги</NuxtLink></li>
+            <li><NuxtLink to="/pro-nas" class="link-focus hover:text-accent">Про нас</NuxtLink></li>
+            <li><NuxtLink to="/kontakty" class="link-focus hover:text-accent">Контакти</NuxtLink></li>
+            <li><NuxtLink to="/#lead-form" class="link-focus hover:text-accent" @click="trackBookingClick('footer')">Запис на ремонт</NuxtLink></li>
           </ul>
         </div>
 
@@ -35,7 +54,7 @@ const { trackPhoneClick, trackBookingClick } = useAnalytics()
           </h3>
           <ul class="space-y-2 text-sm text-text-muted">
             <li v-for="service in services" :key="service.slug">
-              <NuxtLink :to="`/poslugy/${service.slug}`" class="hover:text-accent">
+              <NuxtLink :to="`/poslugy/${service.slug}`" class="link-focus hover:text-accent">
                 {{ service.title }}
               </NuxtLink>
             </li>
@@ -51,22 +70,20 @@ const { trackPhoneClick, trackBookingClick } = useAnalytics()
             <p>
               <a
                 :href="`tel:${siteConfig.phone}`"
-                class="hover:text-accent"
+                class="link-focus hover:text-accent"
                 @click="trackPhoneClick('footer')"
               >
                 {{ siteConfig.phoneDisplay }}
               </a>
             </p>
             <p>{{ siteConfig.workingHours }}</p>
-            <p>
-              <a :href="siteConfig.instagram" target="_blank" rel="noopener noreferrer" class="hover:text-accent">
-                {{ siteConfig.instagramHandle }}
-              </a>
-            </p>
-            <p>
-              <a :href="siteConfig.tiktok" target="_blank" rel="noopener noreferrer" class="hover:text-accent">
-                {{ siteConfig.tiktokHandle }}
-              </a>
+            <p v-for="item in socialLinks" :key="item.platform">
+              <UiSocialLink
+                :platform="item.platform"
+                :href="item.href"
+                :label="item.label"
+                location="footer"
+              />
             </p>
           </address>
         </div>
@@ -75,7 +92,7 @@ const { trackPhoneClick, trackBookingClick } = useAnalytics()
       <div class="mt-10 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-sm text-text-muted md:flex-row">
         <div class="flex flex-col items-center gap-2 md:items-start">
           <p>&copy; {{ new Date().getFullYear() }} {{ siteConfig.name }}. Усі права захищені.</p>
-          <NuxtLink to="/polityka-konfidentsiynosti" class="hover:text-accent">
+          <NuxtLink to="/polityka-konfidentsiynosti" class="link-focus hover:text-accent">
             Політика конфіденційності
           </NuxtLink>
         </div>

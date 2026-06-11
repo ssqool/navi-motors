@@ -21,7 +21,7 @@ const otherPrices = computed(() => prices.slice(4))
           :key="item.service"
           :delay="index * 50"
         >
-          <div class="card h-full text-center">
+          <div class="card-static h-full text-center">
             <p class="text-sm text-text-muted">{{ item.service }}</p>
             <p class="mt-3 text-2xl font-heading text-accent">{{ item.price }}</p>
           </div>
@@ -29,8 +29,8 @@ const otherPrices = computed(() => prices.slice(4))
       </div>
 
       <UiReveal :delay="100">
-        <div class="mt-8 overflow-hidden rounded-xl border border-border">
-          <table class="w-full text-left text-sm">
+        <div class="mt-8 overflow-x-auto rounded-xl border border-border">
+          <table class="w-full min-w-[320px] text-left text-sm">
             <thead class="bg-surface">
               <tr>
                 <th class="px-6 py-4 font-heading uppercase tracking-wide text-text-soft">Інші послуги</th>

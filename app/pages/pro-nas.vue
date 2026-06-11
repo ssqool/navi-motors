@@ -42,7 +42,7 @@ useSeo({
             <div
               v-for="stat in aboutContent.stats"
               :key="stat.label"
-              class="card text-center"
+              class="card-static text-center"
             >
               <p class="text-3xl font-heading text-accent">{{ stat.value }}</p>
               <p class="mt-2 text-sm text-text-muted">{{ stat.label }}</p>
@@ -67,7 +67,7 @@ useSeo({
             :key="value.title"
             :delay="index * 60"
           >
-            <div class="card h-full">
+            <div class="card-static h-full">
               <h3 class="text-base font-heading uppercase tracking-wide">{{ value.title }}</h3>
               <p class="mt-2 text-sm text-text-muted">{{ value.description }}</p>
             </div>

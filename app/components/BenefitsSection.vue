@@ -18,7 +18,7 @@ import { benefits } from '~/data/site'
           :key="benefit.title"
           :delay="index * 70"
         >
-          <div class="card h-full">
+          <div class="card-static h-full">
             <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-accent-soft text-accent">
               <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />

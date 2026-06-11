@@ -40,7 +40,7 @@ const { trackOutboundClick } = useAnalytics()
           :key="review.author + review.date"
           :delay="index * 60"
         >
-          <article class="card h-full">
+          <article class="card-static h-full">
             <div class="mb-3 flex items-center justify-between gap-2">
               <div class="flex items-center gap-1 text-accent" :aria-label="`Оцінка ${review.rating} з 5`">
                 <svg v-for="i in review.rating" :key="i" class="h-4 w-4 fill-current" viewBox="0 0 20 20">

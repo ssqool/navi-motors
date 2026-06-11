@@ -5,6 +5,13 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    html {
+      scroll-padding-top: 5rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -36,7 +43,7 @@
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-transparent px-6 py-3 text-sm font-semibold text-text transition-[transform,background-color,border-color] duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-surface active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-border focus:ring-offset-2 focus:ring-offset-bg;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-transparent px-6 py-3 text-sm font-semibold text-text transition-[transform,background-color,border-color] duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-surface active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 focus:ring-offset-bg;
   }
 
   .card {
@@ -44,11 +51,30 @@
   }
 
   .card-static {
+    @apply rounded-xl border border-border bg-surface p-6 transition-[border-color] duration-200 hover:border-accent/25;
+  }
+
+  .card-static-flush {
     @apply rounded-xl border border-border bg-surface transition-[border-color] duration-200 hover:border-accent/25;
   }
 
   .faq-summary {
-    @apply flex cursor-pointer list-none items-center justify-between gap-4 p-6 font-medium text-text-soft [&::-webkit-details-marker]:hidden;
+    @apply flex cursor-pointer list-none items-center justify-between gap-4 p-6 font-medium text-text-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset [&::-webkit-details-marker]:hidden;
+  }
+
+  .faq-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .faq-content--open {
+    grid-template-rows: 1fr;
+  }
+
+  .faq-content-inner {
+    min-height: 0;
+    overflow: hidden;
   }
 
   .faq-answer {
@@ -88,7 +114,12 @@
     transform: none;
   }
 
-  /* Hero — one-time entrance animation */
+  /* Hero — h1 visible immediately for LCP; motion via transform only */
+  .hero-enter-title {
+    animation: hero-enter-title 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--hero-delay, 0ms);
+  }
+
   .hero-enter {
     opacity: 0;
     animation: hero-enter 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -111,7 +142,7 @@
 
   /* Nav link underline */
   .nav-link {
-    @apply relative text-sm font-medium transition-colors hover:text-accent;
+    @apply relative text-sm font-medium transition-colors hover:text-accent focus-visible:outline-none focus-visible:text-accent;
   }
 
   .nav-link::after {
@@ -120,8 +151,17 @@
   }
 
   .nav-link:hover::after,
+  .nav-link:focus-visible::after,
   .nav-link-active::after {
     @apply scale-x-100;
+  }
+
+  .link-focus {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-bg focus-visible:rounded-sm;
+  }
+
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-xl focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white;
   }
 
   .nav-link-active {
@@ -130,6 +170,16 @@
 }
 
 @layer utilities {
+  @keyframes hero-enter-title {
+    from {
+      transform: translateY(20px);
+    }
+
+    to {
+      transform: translateY(0);
+    }
+  }
+
   @keyframes hero-enter {
     from {
       opacity: 0;
@@ -227,10 +277,19 @@
   }
 
   .hero-enter,
+  .hero-enter-title,
   .hero-bg-enter,
   .hero-bg-zoom {
     opacity: 1 !important;
     animation: none !important;
+    transform: none !important;
+  }
+
+  .faq-content {
+    transition: none !important;
+  }
+
+  .group-hover\:scale-105 {
     transform: none !important;
   }
 

@@ -9,17 +9,34 @@ interface Props {
   showTrustLine?: boolean
   compact?: boolean
   image?: string
+  imageAlt?: string
+  imageWidth?: number
+  imageHeight?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
   showCta: true,
   showTrustLine: true,
   compact: false,
+  imageWidth: 900,
+  imageHeight: 600,
 })
 
 const backgroundImage = computed(() => props.image ?? heroImage.src)
+const backgroundAlt = computed(() => props.imageAlt ?? heroImage.alt)
 
 const { trackPhoneClick, trackBookingClick } = useAnalytics()
+
+useHead(() => ({
+  link: [
+    {
+      rel: 'preload',
+      as: 'image',
+      href: backgroundImage.value,
+      fetchpriority: 'high',
+    },
+  ],
+}))
 </script>
 
 <template>
@@ -27,9 +44,9 @@ const { trackPhoneClick, trackBookingClick } = useAnalytics()
     <div class="absolute inset-0 overflow-hidden">
       <img
         :src="backgroundImage"
-        :alt="heroImage.alt"
-        width="1600"
-        height="900"
+        :alt="backgroundAlt"
+        :width="imageWidth"
+        :height="imageHeight"
         fetchpriority="high"
         decoding="async"
         class="hero-bg-enter hero-bg-zoom absolute inset-0 h-full w-full object-cover opacity-[0.22]"
@@ -40,7 +57,7 @@ const { trackPhoneClick, trackBookingClick } = useAnalytics()
     <div class="container-narrow relative section-padding" :class="compact ? '!py-12 md:!py-16' : ''">
       <div class="max-w-3xl">
         <h1
-          class="hero-enter text-4xl font-heading uppercase tracking-wide md:text-5xl lg:text-6xl"
+          class="hero-enter-title text-4xl font-heading uppercase tracking-wide md:text-5xl lg:text-6xl"
           style="--hero-delay: 0ms"
         >
           {{ title }}
@@ -71,7 +88,7 @@ const { trackPhoneClick, trackBookingClick } = useAnalytics()
           </span>
           <a
             :href="`tel:${siteConfig.phone}`"
-            class="inline-flex items-center gap-2 rounded-xl border border-border bg-surface/80 px-3 py-2 text-sm text-text-soft backdrop-blur-sm transition-colors hover:border-accent/40 hover:text-accent"
+            class="link-focus inline-flex items-center gap-2 rounded-xl border border-border bg-surface/80 px-3 py-2 text-sm text-text-soft backdrop-blur-sm transition-colors hover:border-accent/40 hover:text-accent"
             @click="trackPhoneClick('hero_trust_line')"
           >
             <svg class="h-4 w-4 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">

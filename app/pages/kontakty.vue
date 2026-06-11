@@ -15,9 +15,30 @@ useSeo({
   path: '/kontakty',
 })
 
+import type { SocialPlatform } from '~/components/UiSocialIcon.vue'
+
+type ContactItem = {
+  title: string
+  content: string
+  type: 'text' | 'phone' | 'link' | 'external'
+  href?: string
+  platform?: SocialPlatform
+}
+
+const contactItems: ContactItem[] = [
+  { title: 'Адреса', content: siteConfig.address, type: 'text' },
+  { title: 'Телефон', href: `tel:${siteConfig.phone}`, content: siteConfig.phoneDisplay, type: 'phone' },
+  { title: 'Графік', content: siteConfig.workingHours, type: 'text' },
+  { title: 'Email', href: `mailto:${siteConfig.email}`, content: siteConfig.email, type: 'link' },
+  { title: 'Telegram', href: siteConfig.telegram, content: 'Написати в Telegram', type: 'external', platform: 'telegram' },
+  { title: 'Viber', href: siteConfig.viber, content: 'Написати у Viber', type: 'link', platform: 'viber' },
+  { title: 'Instagram', href: siteConfig.instagram, content: siteConfig.instagramHandle, type: 'external', platform: 'instagram' },
+  { title: 'TikTok', href: siteConfig.tiktok, content: siteConfig.tiktokHandle, type: 'external', platform: 'tiktok' },
+]
+
 const { trackPhoneClick, trackBookingClick, trackOutboundClick } = useAnalytics()
 
-function onContactLinkClick(item: { type: string, title: string, href?: string }) {
+function onContactLinkClick(item: ContactItem) {
   if (item.type === 'phone') {
     trackPhoneClick('contacts_page')
     return
@@ -43,28 +64,22 @@ function onContactLinkClick(item: { type: string, title: string, href?: string }
       <div class="container-narrow">
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <UiReveal
-            v-for="(item, index) in [
-              { title: 'Адреса', content: siteConfig.address, type: 'text' },
-              { title: 'Телефон', href: `tel:${siteConfig.phone}`, content: siteConfig.phoneDisplay, type: 'phone' },
-              { title: 'Графік', content: siteConfig.workingHours, type: 'text' },
-              { title: 'Email', href: `mailto:${siteConfig.email}`, content: siteConfig.email, type: 'link' },
-              { title: 'Telegram', href: siteConfig.telegram, content: 'Написати в Telegram', type: 'external' },
-              { title: 'Viber', href: siteConfig.viber, content: 'Написати у Viber', type: 'link' },
-              { title: 'Instagram', href: siteConfig.instagram, content: siteConfig.instagramHandle, type: 'external' },
-              { title: 'TikTok', href: siteConfig.tiktok, content: siteConfig.tiktokHandle, type: 'external' },
-            ]"
+            v-for="(item, index) in contactItems"
             :key="item.title"
             :delay="index * 50"
           >
-            <div class="card h-full">
-              <h2 class="text-sm font-heading uppercase tracking-wide text-text-muted">{{ item.title }}</h2>
+            <div class="card-static h-full">
+              <h2 class="flex items-center gap-2 text-sm font-heading uppercase tracking-wide text-text-muted">
+                <UiSocialIcon v-if="item.platform" :platform="item.platform" class="h-4 w-4 text-accent" />
+                {{ item.title }}
+              </h2>
               <p v-if="item.type === 'text'" class="mt-2 text-text-soft">{{ item.content }}</p>
               <a
                 v-else
                 :href="item.href"
                 :target="item.type === 'external' ? '_blank' : undefined"
                 :rel="item.type === 'external' ? 'noopener noreferrer' : undefined"
-                class="mt-2 block transition-colors hover:underline"
+                class="link-focus mt-2 block transition-colors hover:underline"
                 :class="item.type === 'phone' ? 'text-xl text-accent' : 'text-accent'"
                 @click="onContactLinkClick(item)"
               >
@@ -78,24 +93,20 @@ function onContactLinkClick(item: { type: string, title: string, href?: string }
           <div class="mt-8 flex flex-wrap gap-4">
             <UiPhoneButton location="contacts_page" />
             <UiMapButton variant="primary" location="contacts_page" />
-            <a
+            <UiSocialLink
+              platform="instagram"
               :href="siteConfig.instagram"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-secondary"
-              @click="trackOutboundClick('instagram', siteConfig.instagram, 'contacts_page')"
-            >
-              Написати в Instagram
-            </a>
-            <a
+              label="Написати в Instagram"
+              location="contacts_page"
+              variant="button"
+            />
+            <UiSocialLink
+              platform="tiktok"
               :href="siteConfig.tiktok"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-secondary"
-              @click="trackOutboundClick('tiktok', siteConfig.tiktok, 'contacts_page')"
-            >
-              TikTok
-            </a>
+              label="TikTok"
+              location="contacts_page"
+              variant="button"
+            />
             <a href="#lead-form" class="btn-primary" @click="trackBookingClick('contacts_page')">
               Записатись онлайн
             </a>

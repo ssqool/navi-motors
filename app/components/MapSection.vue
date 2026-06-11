@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { siteConfig } from '~/data/site'
 
-const { trackPhoneClick, trackMapClick, trackOutboundClick } = useAnalytics()
+const { trackPhoneClick, trackMapClick } = useAnalytics()
 </script>
 
 <template>
@@ -17,11 +17,11 @@ const { trackPhoneClick, trackMapClick, trackOutboundClick } = useAnalytics()
       <div class="mt-10 grid gap-8 lg:grid-cols-2">
         <UiReveal>
           <div class="space-y-6">
-            <div class="card">
+            <div class="card-static">
               <h3 class="text-sm font-heading uppercase tracking-wide text-text-muted">Адреса</h3>
               <p class="mt-2 text-text-soft">{{ siteConfig.address }}</p>
             </div>
-            <div class="card">
+            <div class="card-static">
               <h3 class="text-sm font-heading uppercase tracking-wide text-text-muted">Телефон</h3>
               <a
                 :href="`tel:${siteConfig.phone}`"
@@ -31,43 +31,17 @@ const { trackPhoneClick, trackMapClick, trackOutboundClick } = useAnalytics()
                 {{ siteConfig.phoneDisplay }}
               </a>
             </div>
-            <div class="card">
+            <div class="card-static">
               <h3 class="text-sm font-heading uppercase tracking-wide text-text-muted">Графік роботи</h3>
               <p class="mt-2 text-text-soft">{{ siteConfig.workingHours }}</p>
             </div>
             <div class="flex flex-wrap gap-4">
               <UiPhoneButton location="map_section" />
               <UiMapButton location="map_section" />
-              <a
-                :href="siteConfig.telegram"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn-secondary"
-                @click="trackOutboundClick('telegram', siteConfig.telegram, 'map_section')"
-              >
-                Telegram
-              </a>
-              <a :href="siteConfig.viber" class="btn-secondary" @click="trackOutboundClick('viber', siteConfig.viber, 'map_section')">
-                Viber
-              </a>
-              <a
-                :href="siteConfig.instagram"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn-secondary"
-                @click="trackOutboundClick('instagram', siteConfig.instagram, 'map_section')"
-              >
-                Instagram
-              </a>
-              <a
-                :href="siteConfig.tiktok"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn-secondary"
-                @click="trackOutboundClick('tiktok', siteConfig.tiktok, 'map_section')"
-              >
-                TikTok
-              </a>
+              <UiSocialLink platform="telegram" :href="siteConfig.telegram" label="Telegram" location="map_section" variant="button" />
+              <UiSocialLink platform="viber" :href="siteConfig.viber" label="Viber" location="map_section" variant="button" :external="false" />
+              <UiSocialLink platform="instagram" :href="siteConfig.instagram" label="Instagram" location="map_section" variant="button" />
+              <UiSocialLink platform="tiktok" :href="siteConfig.tiktok" label="TikTok" location="map_section" variant="button" />
             </div>
           </div>
         </UiReveal>

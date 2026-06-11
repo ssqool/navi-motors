@@ -27,6 +27,14 @@ watch(isMenuOpen, (open) => {
 onUnmounted(() => {
   if (import.meta.client) document.body.style.overflow = ''
 })
+
+function closeMenu() {
+  isMenuOpen.value = false
+}
+
+function onMenuKeydown(event: KeyboardEvent) {
+  if (event.key === 'Escape') closeMenu()
+}
 </script>
 
 <template>
@@ -57,10 +65,10 @@ onUnmounted(() => {
 
         <button
           type="button"
-          class="inline-flex items-center justify-center rounded-lg border border-border p-2 text-text transition-colors hover:border-accent/40 hover:text-accent md:hidden"
+          class="inline-flex items-center justify-center rounded-lg border border-border p-2 text-text transition-colors hover:border-accent/40 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg md:hidden"
           :aria-expanded="isMenuOpen"
           aria-controls="mobile-menu"
-          aria-label="Відкрити меню"
+          :aria-label="isMenuOpen ? 'Закрити меню' : 'Відкрити меню'"
           @click="isMenuOpen = !isMenuOpen"
         >
           <svg v-if="!isMenuOpen" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -89,13 +97,14 @@ onUnmounted(() => {
           v-if="isMenuOpen"
           id="mobile-menu"
           class="fixed inset-x-0 top-16 z-[100] max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-border bg-bg-soft shadow-lg md:hidden"
+          @keydown="onMenuKeydown"
         >
-          <nav class="container-narrow flex flex-col gap-4 py-4" aria-label="Мобільна навігація">
+          <nav class="container-narrow flex flex-col gap-2 py-4" aria-label="Мобільна навігація">
             <NuxtLink
               v-for="link in navLinks"
               :key="link.to"
               :to="link.to"
-              class="text-base font-medium transition-colors hover:text-accent"
+              class="link-focus rounded-lg py-3 text-base font-medium transition-colors hover:text-accent"
               :class="isActive(link.to) ? 'text-accent' : 'text-text-soft'"
             >
               {{ link.label }}

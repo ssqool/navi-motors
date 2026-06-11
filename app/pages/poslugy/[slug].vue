@@ -38,6 +38,7 @@ useSeo({
       :title="service.h1"
       :subtitle="service.heroText"
       :image="serviceHeroImages[service.slug]"
+      :image-alt="`${service.title} — Navi Motors, Київ`"
       :show-cta="true"
     />
 
@@ -75,7 +76,7 @@ useSeo({
             :key="step.step"
             :delay="index * 70"
           >
-            <div class="card h-full">
+            <div class="card-static h-full">
               <span class="text-3xl font-heading text-accent">{{ step.step }}</span>
               <h3 class="mt-3 text-base font-heading uppercase tracking-wide">{{ step.title }}</h3>
               <p class="mt-2 text-sm text-text-muted">{{ step.description }}</p>

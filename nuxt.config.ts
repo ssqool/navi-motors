@@ -20,15 +20,16 @@ export default defineNuxtConfig({
 
   googleFonts: {
     families: {
-      Oswald: [400, 500, 600, 700],
-      Manrope: [400, 500, 600, 700],
+      Oswald: [400, 600, 700],
+      Manrope: [400, 600, 700],
     },
+    subsets: ['cyrillic', 'latin'],
     display: 'swap',
     preload: true,
   },
 
   app: {
-    pageTransition: { name: 'page', mode: 'out-in' },
+    pageTransition: { name: 'page' },
     head: {
       htmlAttrs: { lang: 'uk' },
       charset: 'utf-8',
@@ -57,11 +58,13 @@ export default defineNuxtConfig({
     exclude: ['/api/**'],
   },
 
-  robots: {
-    allow: '/',
-    disallow: ['/api/'],
-    sitemap: '/sitemap.xml',
-  },
+  robots: process.env.VERCEL_ENV && process.env.VERCEL_ENV !== 'production'
+    ? { disallow: ['/'] }
+    : {
+        allow: '/',
+        disallow: ['/api/'],
+        sitemap: '/sitemap.xml',
+      },
 
   runtimeConfig: {
     telegramBotToken: '',

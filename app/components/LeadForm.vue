@@ -82,7 +82,7 @@ async function submitForm() {
         </UiReveal>
 
         <Transition name="menu">
-          <div v-if="status === 'success'" class="mt-8 rounded-xl border border-accent/30 bg-accent-soft p-6 text-center">
+          <div v-if="status === 'success'" role="status" aria-live="polite" class="mt-8 rounded-xl border border-accent/30 bg-accent-soft p-6 text-center">
             <p class="font-medium text-text">
               Дякуємо! Ми отримали заявку і звʼяжемось з вами найближчим часом.
             </p>
@@ -162,7 +162,7 @@ async function submitForm() {
             aria-hidden="true"
           >
 
-          <p v-if="status === 'error'" class="text-sm text-accent">
+          <p v-if="status === 'error'" role="alert" class="text-sm text-red-400">
             {{ errorMessage }}
           </p>
 
@@ -171,7 +171,7 @@ async function submitForm() {
               v-model="consent"
               type="checkbox"
               required
-              class="mt-1 h-4 w-4 shrink-0 rounded border-border bg-surface text-accent focus:ring-accent"
+              class="mt-1 h-4 w-4 shrink-0 rounded border-border bg-surface text-accent focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg"
             >
             <span>
               Надсилаючи заявку, я погоджуюсь з
@@ -186,6 +186,7 @@ async function submitForm() {
             type="submit"
             class="btn-primary w-full"
             :disabled="status === 'loading' || !consent"
+            :aria-busy="status === 'loading'"
           >
             <UiSpinner v-if="status === 'loading'" />
             {{ status === 'loading' ? 'Надсилання...' : 'Надіслати заявку' }}

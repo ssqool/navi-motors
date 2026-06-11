@@ -4,20 +4,27 @@ const props = defineProps<{
   answer: string
 }>()
 
+const isOpen = ref(false)
 const { trackFaqExpand } = useAnalytics()
 
-function onToggle(event: Event) {
-  const details = event.target as HTMLDetailsElement
-  if (details.open) trackFaqExpand(props.question)
+function toggle() {
+  isOpen.value = !isOpen.value
+  if (isOpen.value) trackFaqExpand(props.question)
 }
 </script>
 
 <template>
-  <details class="card-static group" @toggle="onToggle">
-    <summary class="faq-summary">
+  <div class="faq-item card-static-flush">
+    <button
+      type="button"
+      class="faq-summary w-full text-left"
+      :aria-expanded="isOpen"
+      @click="toggle"
+    >
       {{ question }}
       <svg
-        class="h-5 w-5 shrink-0 text-accent transition-transform duration-300 group-open:rotate-180"
+        class="h-5 w-5 shrink-0 text-accent transition-transform duration-300"
+        :class="isOpen ? 'rotate-180' : ''"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -25,9 +32,16 @@ function onToggle(event: Event) {
       >
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
       </svg>
-    </summary>
-    <p class="faq-answer">
-      {{ answer }}
-    </p>
-  </details>
+    </button>
+    <div
+      class="faq-content"
+      :class="isOpen ? 'faq-content--open' : ''"
+    >
+      <div class="faq-content-inner">
+        <p class="faq-answer">
+          {{ answer }}
+        </p>
+      </div>
+    </div>
+  </div>
 </template>

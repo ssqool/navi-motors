@@ -17,13 +17,13 @@ function onClick() {
 <template>
   <NuxtLink
     :to="`/poslugy/${service.slug}`"
-    class="card group relative flex h-full flex-col overflow-hidden"
+    class="card link-focus group relative flex h-full flex-col overflow-hidden"
     :class="featured ? 'border-accent/40 bg-surface ring-1 ring-accent/20' : ''"
     @click="onClick"
   >
     <span
       v-if="featured"
-      class="absolute right-4 top-4 rounded-md bg-accent px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white"
+      class="absolute right-4 top-4 rounded-md bg-accent px-2 py-0.5 text-xs font-semibold uppercase tracking-wider text-white"
     >
       Популярна
     </span>
