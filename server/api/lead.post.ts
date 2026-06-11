@@ -29,6 +29,11 @@ interface LeadBody {
   sourcePage?: string
 }
 
+interface TelegramResponse {
+  ok: boolean
+  description?: string
+}
+
 function validateLead(body: LeadBody) {
   if (!body.name?.trim()) {
     throw createError({ statusCode: 400, statusMessage: 'Імʼя обовʼязкове' })
@@ -103,6 +108,49 @@ function formatTelegramMessage(
   return blocks.join('\n')
 }
 
+function formatPlainTelegramMessage(
+  body: Required<Pick<LeadBody, 'name' | 'phone' | 'car' | 'problem' | 'preferredDay'>> & Pick<LeadBody, 'sourcePage'>,
+) {
+  const lines = [
+    '✨ Нова заявка · Navi Motors',
+    '',
+    `👤 Імʼя: ${body.name}`,
+    `📞 Телефон: ${formatPhoneDisplay(body.phone)}`,
+    `🚙 Авто: ${body.car}`,
+    `🔧 Проблема: ${body.problem}`,
+    `📅 Бажаний день: ${body.preferredDay}`,
+  ]
+
+  if (body.sourcePage) lines.push(`📍 Сторінка: ${body.sourcePage}`)
+  lines.push(`🕐 ${formatKyivTimestamp()}`)
+
+  return lines.join('\n')
+}
+
+function normalizeChatId(chatId: string): string | number {
+  const trimmed = chatId.trim().replace(/^["']|["']$/g, '')
+  if (/^-?\d+$/.test(trimmed)) return Number(trimmed)
+  return trimmed
+}
+
+async function sendTelegramMessage(
+  token: string,
+  chatId: string | number,
+  text: string,
+  parseMode?: 'HTML',
+): Promise<TelegramResponse> {
+  return $fetch<TelegramResponse>(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method: 'POST',
+    body: {
+      chat_id: chatId,
+      text,
+      ...(parseMode ? { parse_mode: parseMode } : {}),
+    },
+    ignoreResponseError: true,
+    timeout: 15_000,
+  })
+}
+
 export default defineEventHandler(async (event) => {
   const ip = getRequestIP(event, { xForwardedFor: true }) || 'unknown'
 
@@ -114,40 +162,38 @@ export default defineEventHandler(async (event) => {
   validateLead(body)
 
   const config = useRuntimeConfig()
-  const token = config.telegramBotToken
-  const chatId = config.telegramChatId
+  const token = String(config.telegramBotToken || '').trim()
+  const chatIdRaw = String(config.telegramChatId || '').trim()
 
-  if (!token || !chatId) {
-    console.warn('[lead] Telegram credentials not configured')
+  if (!token || !chatIdRaw) {
+    console.error('[lead] Telegram credentials missing on server', {
+      hasToken: Boolean(token),
+      hasChatId: Boolean(chatIdRaw),
+    })
     throw createError({ statusCode: 503, statusMessage: 'Сервіс тимчасово недоступний' })
   }
 
-  const message = formatTelegramMessage({
+  const payload = {
     name: body.name!.trim(),
     phone: body.phone!.trim(),
     problem: body.problem!.trim(),
     car: body.car!.trim(),
     preferredDay: body.preferredDay!.trim(),
     sourcePage: body.sourcePage?.trim(),
-  })
+  }
 
-  const response = await $fetch<{ ok: boolean; description?: string }>(
-    `https://api.telegram.org/bot${token}/sendMessage`,
-    {
-      method: 'POST',
-      body: {
-        chat_id: chatId,
-        text: message,
-        parse_mode: 'HTML',
-      },
-    },
-  ).catch((error: { data?: { description?: string } }) => {
-    console.error('[lead] Telegram API error:', error.data?.description ?? error)
-    throw createError({ statusCode: 502, statusMessage: 'Не вдалося надіслати заявку' })
-  })
+  const chatId = normalizeChatId(chatIdRaw)
+  const htmlMessage = formatTelegramMessage(payload)
+
+  let response = await sendTelegramMessage(token, chatId, htmlMessage, 'HTML')
+
+  if (!response.ok && response.description?.includes('parse entities')) {
+    console.warn('[lead] HTML parse failed, retrying as plain text')
+    response = await sendTelegramMessage(token, chatId, formatPlainTelegramMessage(payload))
+  }
 
   if (!response.ok) {
-    console.error('[lead] Telegram response not ok:', response.description)
+    console.error('[lead] Telegram sendMessage failed:', response.description)
     throw createError({ statusCode: 502, statusMessage: 'Не вдалося надіслати заявку' })
   }
 

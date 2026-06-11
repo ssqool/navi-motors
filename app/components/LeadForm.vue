@@ -22,8 +22,16 @@ const status = ref<'idle' | 'loading' | 'success' | 'error'>('idle')
 const errorMessage = ref('')
 const consent = ref(false)
 const formStarted = ref(false)
+const successRef = ref<HTMLElement | null>(null)
 
 const { trackFormStart, trackLeadSubmit, trackFormError, trackPhoneClick } = useAnalytics()
+
+function scrollToSuccessMessage() {
+  const el = successRef.value
+  if (!el) return
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  el.focus({ preventScroll: true })
+}
 
 function onFormInteraction() {
   if (formStarted.value) return
@@ -81,8 +89,15 @@ async function submitForm() {
           </p>
         </UiReveal>
 
-        <Transition name="menu">
-          <div v-if="status === 'success'" role="status" aria-live="polite" class="mt-8 rounded-xl border border-accent/30 bg-accent-soft p-6 text-center">
+        <Transition name="menu" @after-enter="scrollToSuccessMessage">
+          <div
+            v-if="status === 'success'"
+            ref="successRef"
+            role="status"
+            aria-live="polite"
+            tabindex="-1"
+            class="mt-8 scroll-mt-24 rounded-xl border border-accent/30 bg-accent-soft p-6 text-center outline-none md:scroll-mt-28"
+          >
             <p class="font-medium text-text">
               Дякуємо! Ми отримали заявку і передзвонимо в порядку черги.
             </p>
