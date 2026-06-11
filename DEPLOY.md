@@ -39,7 +39,7 @@
 
 ## 5. Content before final release
 
-- [ ] Replace placeholder gallery images with real workshop photos
-- [ ] Update `app/data/reviews.ts` with real Google reviews
+- [x] Workshop gallery photos from client (`public/images/gallery/`)
+- [x] Update `app/data/reviews.ts` with real Google reviews (4.7 · 12)
 - [ ] Confirm prices and working hours with the client
-- [ ] Replace mock contact channels (Telegram, Viber, email) in `app/data/site.ts`
+- [x] Contact channels in `app/data/site.ts` (Telegram @NAVI_MOTORS_KYIV, Viber)

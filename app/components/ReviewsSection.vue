@@ -37,7 +37,7 @@ const { trackOutboundClick } = useAnalytics()
       <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <UiReveal
           v-for="(review, index) in reviews"
-          :key="review.author + review.date"
+          :key="review.author + String(index)"
           :delay="index * 60"
         >
           <article class="card-static h-full">
@@ -51,7 +51,7 @@ const { trackOutboundClick } = useAnalytics()
             </div>
             <p class="text-sm text-text-soft">"{{ review.text }}"</p>
             <p class="mt-4 text-xs text-text-muted">
-              {{ review.author }} · {{ review.date }}
+              {{ review.author }}<span v-if="review.date"> · {{ review.date }}</span>
             </p>
           </article>
         </UiReveal>

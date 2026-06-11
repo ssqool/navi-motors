@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { siteConfig } from '~/data/site'
+import { pageHeroImages } from '~/data/gallery'
 
 definePageMeta({ layout: 'default' })
 
@@ -29,8 +30,7 @@ const contactItems: ContactItem[] = [
   { title: 'Адреса', content: siteConfig.address, type: 'text' },
   { title: 'Телефон', href: `tel:${siteConfig.phone}`, content: siteConfig.phoneDisplay, type: 'phone' },
   { title: 'Графік', content: siteConfig.workingHours, type: 'text' },
-  { title: 'Email', href: `mailto:${siteConfig.email}`, content: siteConfig.email, type: 'link' },
-  { title: 'Telegram', href: siteConfig.telegram, content: 'Написати в Telegram', type: 'external', platform: 'telegram' },
+  { title: 'Telegram', href: siteConfig.telegram, content: siteConfig.telegramHandle, type: 'external', platform: 'telegram' },
   { title: 'Viber', href: siteConfig.viber, content: 'Написати у Viber', type: 'link', platform: 'viber' },
   { title: 'Instagram', href: siteConfig.instagram, content: siteConfig.instagramHandle, type: 'external', platform: 'instagram' },
   { title: 'TikTok', href: siteConfig.tiktok, content: siteConfig.tiktokHandle, type: 'external', platform: 'tiktok' },
@@ -56,6 +56,9 @@ function onContactLinkClick(item: ContactItem) {
     <HeroSection
       title="Контакти Navi Motors"
       subtitle="Запишіться на діагностику або ремонт авто у Києві. Ми на вул. Віталія Скакуна, 26."
+      :image="pageHeroImages.contacts.src"
+      :image-alt="pageHeroImages.contacts.alt"
+      :image-position="pageHeroImages.contacts.position"
       :show-cta="false"
       compact
     />
@@ -108,7 +111,7 @@ function onContactLinkClick(item: ContactItem) {
               variant="button"
             />
             <a href="#lead-form" class="btn-primary" @click="trackBookingClick('contacts_page')">
-              Записатись онлайн
+              Залишити заявку
             </a>
           </div>
         </UiReveal>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { aboutContent } from '~/data/about'
+import { pageHeroImages } from '~/data/gallery'
 import { siteConfig } from '~/data/site'
 
 definePageMeta({ layout: 'default' })
@@ -23,6 +24,9 @@ useSeo({
     <HeroSection
       :title="aboutContent.heroTitle"
       :subtitle="aboutContent.heroSubtitle"
+      :image="pageHeroImages.about.src"
+      :image-alt="pageHeroImages.about.alt"
+      :image-position="pageHeroImages.about.position"
       :show-cta="true"
       compact
     />
@@ -61,7 +65,7 @@ useSeo({
           </p>
         </UiReveal>
 
-        <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <UiReveal
             v-for="(value, index) in aboutContent.values"
             :key="value.title"

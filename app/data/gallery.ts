@@ -6,107 +6,142 @@ export interface GalleryImage {
   category: 'facade' | 'box' | 'work' | 'tools' | 'waiting' | 'before-after'
 }
 
-/** Local workshop photos (public/images/gallery/). Some are real shots from Navi Motors social media. */
+export interface HeroPhoto {
+  src: string
+  alt: string
+  /** CSS object-position for background crop */
+  position?: string
+}
+
+/** Real workshop photos from Navi Motors (public/images/gallery/) */
 export const galleryImages: GalleryImage[] = [
   {
-    id: 'facade',
-    src: '/images/gallery/facade.jpg',
-    alt: 'Фасад автосервісу Navi Motors у Києві',
-    caption: 'Фасад СТО',
-    category: 'facade',
-  },
-  {
-    id: 'entrance',
-    src: '/images/gallery/entrance.jpg',
-    alt: 'Вхід та зона прийому Navi Motors',
-    caption: 'Зона прийому',
-    category: 'facade',
-  },
-  {
-    id: 'lift',
-    src: '/images/gallery/lift.jpg',
-    alt: 'Авто на підйомнику в Navi Motors',
+    id: 'lift-mercedes',
+    src: '/images/gallery/mercedes-on-lift.jpg',
+    alt: 'Mercedes-Benz на підйомнику в автосервісі Navi Motors, Київ',
     caption: 'Авто на підйомнику',
     category: 'box',
   },
   {
-    id: 'diagnostics',
-    src: '/images/gallery/mercedes-diagnostics.jpg',
-    alt: 'Діагностика Mercedes-Benz в Navi Motors',
-    caption: 'Діагностика Mercedes-Benz',
+    id: 'lift-volvo',
+    src: '/images/gallery/volvo-on-lift.jpg',
+    alt: 'Volvo на підйомнику в Navi Motors — діагностика та обслуговування',
+    caption: 'Діагностика на підйомнику',
+    category: 'box',
+  },
+  {
+    id: 'lift-suv',
+    src: '/images/gallery/suv-on-lift.jpg',
+    alt: 'Перевірка ходової на підйомнику в Navi Motors',
+    caption: 'Перевірка ходової',
+    category: 'box',
+  },
+  {
+    id: 'vw-service',
+    src: '/images/gallery/vw-golf-service.jpg',
+    alt: 'Volkswagen у боксі Navi Motors — технічне обслуговування',
+    caption: 'Технічне обслуговування',
     category: 'work',
   },
   {
-    id: 'mechanic',
-    src: '/images/gallery/assembly.jpg',
-    alt: 'Майстер за роботою в Navi Motors',
-    caption: 'Майстер за роботою',
-    category: 'work',
-  },
-  {
-    id: 'tools',
-    src: '/images/gallery/tools.jpg',
-    alt: 'Інструменти та обладнання Navi Motors',
-    caption: 'Інструменти',
-    category: 'tools',
-  },
-  {
-    id: 'suspension',
-    src: '/images/gallery/suspension.jpg',
-    alt: 'Ремонт ходової в Navi Motors',
-    caption: 'Ремонт ходової',
-    category: 'work',
-  },
-  {
-    id: 'brakes',
-    src: '/images/gallery/brakes.jpg',
-    alt: 'Ремонт гальмівної системи в Navi Motors',
-    caption: 'Гальмівна система',
-    category: 'work',
-  },
-  {
-    id: 'parts',
-    src: '/images/gallery/engine-work.jpg',
-    alt: 'Ремонт ГРМ — головка блоку циліндрів у Navi Motors',
+    id: 'bmw-engine',
+    src: '/images/gallery/bmw-engine-service.jpg',
+    alt: 'Ремонт двигуна BMW в автосервісі Navi Motors',
     caption: 'Ремонт двигуна',
     category: 'work',
   },
   {
-    id: 'waiting',
-    src: '/images/gallery/waiting.jpg',
-    alt: 'Зона очікування Navi Motors',
-    caption: 'Зона очікування',
-    category: 'waiting',
+    id: 'engine-head',
+    src: '/images/gallery/engine-cylinder-head.jpg',
+    alt: 'Ремонт ГРМ та головки блоку циліндрів у Navi Motors',
+    caption: 'Ремонт ГРМ',
+    category: 'work',
   },
   {
-    id: 'before',
-    src: '/images/gallery/bodywork.jpg',
-    alt: 'Кузовні роботи BMW в Navi Motors',
-    caption: 'Кузовні роботи',
-    category: 'before-after',
+    id: 'suspension',
+    src: '/images/gallery/suspension-coilover.jpg',
+    alt: 'Заміна амортизаторів і ремонт підвіски в Navi Motors',
+    caption: 'Ремонт ходової',
+    category: 'work',
   },
   {
-    id: 'after',
-    src: '/images/gallery/after.jpg',
-    alt: 'Авто після ремонту в Navi Motors',
-    caption: 'Після ремонту',
-    category: 'before-after',
+    id: 'complex-repair',
+    src: '/images/gallery/tesla-body-repair.jpg',
+    alt: 'Складний ремонт авто в майстерні Navi Motors, Київ',
+    caption: 'Складний ремонт',
+    category: 'work',
   },
 ]
 
-export const heroImage = {
-  src: '/images/gallery/facade.jpg',
-  alt: 'Автосервіс Navi Motors у Києві',
+export const heroImage: HeroPhoto = {
+  src: '/images/gallery/mercedes-on-lift.jpg',
+  alt: 'Автосервіс Navi Motors у Києві — бокс з підйомником',
+  position: 'center 35%',
 }
 
-/** Hero images for service SEO pages */
-export const serviceHeroImages: Record<string, string> = {
-  'diagnostyka-avto-kyiv': '/images/gallery/mercedes-diagnostics.jpg',
-  'tehnichne-obslugovuvannia-kyiv': '/images/gallery/tools.jpg',
-  'remont-hodovoi-kyiv': '/images/gallery/suspension.jpg',
-  'remont-galm-kyiv': '/images/gallery/brakes.jpg',
-  'remont-dvyguna-kyiv': '/images/gallery/engine-work.jpg',
-  'remont-transmisii-kyiv': '/images/gallery/assembly.jpg',
-  'remont-rulevoho-upravlinnia-kyiv': '/images/gallery/lift.jpg',
-  'perevirka-avto-pered-kupivleiu-kyiv': '/images/gallery/after.jpg',
+/** Hero backgrounds for main pages */
+export const pageHeroImages = {
+  home: {
+    src: '/images/gallery/vw-golf-service.jpg',
+    alt: 'Navi Motors — автосервіс у Києві',
+    position: 'center 55%',
+  },
+  about: {
+    src: '/images/gallery/bmw-engine-service.jpg',
+    alt: 'Майстерня Navi Motors — ремонт двигуна та складні роботи',
+    position: 'center 30%',
+  },
+  contacts: {
+    src: '/images/gallery/vw-golf-service.jpg',
+    alt: 'Автосервіс Navi Motors на вул. Віталія Скакуна, 26, Київ',
+    position: 'center 55%',
+  },
+  services: {
+    src: '/images/gallery/volvo-on-lift.jpg',
+    alt: 'Послуги автосервісу Navi Motors у Києві',
+    position: 'center 40%',
+  },
+} satisfies Record<string, HeroPhoto>
+
+/** Hero backgrounds for individual service pages */
+export const serviceHeroImages: Record<string, HeroPhoto> = {
+  'diagnostyka-avto-kyiv': {
+    src: '/images/gallery/volvo-on-lift.jpg',
+    alt: 'Діагностика авто на підйомнику — Navi Motors, Київ',
+    position: 'center 40%',
+  },
+  'tehnichne-obslugovuvannia-kyiv': {
+    src: '/images/gallery/vw-golf-service.jpg',
+    alt: 'Технічне обслуговування авто — Navi Motors, Київ',
+    position: 'center 55%',
+  },
+  'remont-hodovoi-kyiv': {
+    src: '/images/gallery/suspension-coilover.jpg',
+    alt: 'Ремонт ходової та підвіски — Navi Motors, Київ',
+    position: 'center 45%',
+  },
+  'remont-galm-kyiv': {
+    src: '/images/gallery/suv-on-lift.jpg',
+    alt: 'Ремонт гальмівної системи на підйомнику — Navi Motors, Київ',
+    position: 'center 35%',
+  },
+  'remont-dvyguna-kyiv': {
+    src: '/images/gallery/engine-cylinder-head.jpg',
+    alt: 'Ремонт двигуна та ГРМ — Navi Motors, Київ',
+    position: 'center 40%',
+  },
+  'remont-transmisii-kyiv': {
+    src: '/images/gallery/bmw-engine-service.jpg',
+    alt: 'Ремонт трансмісії та двигуна — Navi Motors, Київ',
+    position: 'center 30%',
+  },
+  'remont-rulevoho-upravlinnia-kyiv': {
+    src: '/images/gallery/mercedes-on-lift.jpg',
+    alt: 'Ремонт рульового управління — Navi Motors, Київ',
+    position: 'center 35%',
+  },
+}
+
+export function getServiceHero(slug: string): HeroPhoto {
+  return serviceHeroImages[slug] ?? heroImage
 }

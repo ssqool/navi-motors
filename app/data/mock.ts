@@ -1,9 +1,9 @@
-/** All mock data — replace with real client data before final release */
-export const IS_MOCK_DATA = true
+/** Mock stats — replace years/repairs when client confirms */
+export const IS_MOCK_DATA = false
 
 export const mockMeta = {
-  googleRating: 4.8,
-  googleReviewCount: 24,
+  googleRating: 4.7,
+  googleReviewCount: 12,
   yearsInBusiness: 3,
   completedRepairs: 1200,
 } as const

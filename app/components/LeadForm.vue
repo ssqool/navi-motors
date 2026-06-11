@@ -43,9 +43,9 @@ async function submitForm() {
       body: {
         name: form.name,
         phone: form.phone,
-        car: form.car || undefined,
+        car: form.car,
         problem: form.problem,
-        preferredDay: form.preferredDay || undefined,
+        preferredDay: form.preferredDay,
         sourcePage: props.sourcePage,
       },
     })
@@ -70,9 +70,9 @@ async function submitForm() {
     <div class="container-narrow">
       <div class="mx-auto max-w-2xl">
         <UiReveal>
-          <h2 class="section-title text-center">Записатись на ремонт</h2>
+          <h2 class="section-title text-center">Залишити заявку</h2>
           <p class="section-subtitle mx-auto text-center">
-            Залиште заявку — ми звʼяжемось з вами найближчим часом. Або зателефонуйте:
+            Передзвонимо в порядку черги. Візит у СТО — після підтвердження по телефону. Або зателефонуйте:
             <a
               :href="`tel:${siteConfig.phone}`"
               class="text-accent hover:underline"
@@ -84,7 +84,7 @@ async function submitForm() {
         <Transition name="menu">
           <div v-if="status === 'success'" role="status" aria-live="polite" class="mt-8 rounded-xl border border-accent/30 bg-accent-soft p-6 text-center">
             <p class="font-medium text-text">
-              Дякуємо! Ми отримали заявку і звʼяжемось з вами найближчим часом.
+              Дякуємо! Ми отримали заявку і передзвонимо в порядку черги.
             </p>
           </div>
         </Transition>
@@ -118,13 +118,14 @@ async function submitForm() {
           </div>
 
           <div>
-            <label for="car" class="mb-1 block text-sm text-text-muted">Марка / модель авто</label>
+            <label for="car" class="mb-1 block text-sm text-text-muted">Марка / модель авто *</label>
             <input
               id="car"
               v-model="form.car"
               type="text"
+              required
               class="w-full rounded-xl border border-border bg-surface px-4 py-3 text-text transition-[border-color,box-shadow] duration-200 placeholder:text-text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
-              placeholder="Наприклад, BMW F30"
+              placeholder="Наприклад, Toyota Camry 2015"
             >
           </div>
 
@@ -141,11 +142,12 @@ async function submitForm() {
           </div>
 
           <div>
-            <label for="preferredDay" class="mb-1 block text-sm text-text-muted">Бажаний день</label>
+            <label for="preferredDay" class="mb-1 block text-sm text-text-muted">Бажаний день *</label>
             <input
               id="preferredDay"
               v-model="form.preferredDay"
               type="text"
+              required
               class="w-full rounded-xl border border-border bg-surface px-4 py-3 text-text transition-[border-color,box-shadow] duration-200 placeholder:text-text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
               placeholder="Наприклад, пʼятниця"
             >

@@ -35,6 +35,6 @@ function onClick() {
     ]"
     @click="onClick"
   >
-    Записатись
+    Залишити заявку
   </NuxtLink>
 </template>

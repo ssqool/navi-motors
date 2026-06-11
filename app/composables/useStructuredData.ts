@@ -35,6 +35,7 @@ export function useStructuredData(options: StructuredDataOptions = {}) {
     siteConfig.instagram,
     siteConfig.googleMaps,
     siteConfig.tiktok,
+    siteConfig.telegram,
   ].filter(Boolean)
 
   const autoRepair: Record<string, unknown> = {
@@ -46,7 +47,6 @@ export function useStructuredData(options: StructuredDataOptions = {}) {
     logo: `${siteUrl}/logo.svg`,
     url: siteUrl,
     telephone: siteConfig.phone,
-    email: siteConfig.email,
     priceRange: siteConfig.priceRange,
     address: {
       '@type': 'PostalAddress',

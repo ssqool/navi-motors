@@ -22,10 +22,9 @@ export const siteConfig = {
   workingHoursSchema: [
     { dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '10:00', closes: '18:00' },
   ],
-  /** Mock contact channels — confirm with client */
-  telegram: 'https://t.me/+380985355080',
+  telegram: 'https://t.me/NAVI_MOTORS_KYIV',
+  telegramHandle: '@NAVI_MOTORS_KYIV',
   viber: 'viber://chat?number=380985355080',
-  email: 'info@navi-motors.com.ua',
   priceRange: '₴₴',
   geo: {
     latitude: 50.4366276,
@@ -55,7 +54,7 @@ export const benefits = [
     description: 'Допомагаємо з діагностикою, підбором запчастин, ремонтом і подальшим обслуговуванням.',
   },
   {
-    title: 'Зручний запис',
-    description: 'Можна записатись телефоном, через форму на сайті або соціальні мережі.',
+    title: 'Запис на візит',
+    description: 'Заявка на сайті або дзвінок — передзвонимо в порядку черги. Візит у СТО після узгодження по телефону.',
   },
 ] as const

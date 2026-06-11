@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { pageHeroImages } from '~/data/gallery'
+
 definePageMeta({ layout: 'default' })
 
 useSeo({
@@ -15,6 +17,9 @@ useSeo({
     <HeroSection
       title="СТО Navi Motors у Києві"
       subtitle="Діагностика, технічне обслуговування та ремонт авто під ключ. Пояснюємо проблему, погоджуємо вартість до початку робіт і виконуємо ремонт без зайвих питань."
+      :image="pageHeroImages.home.src"
+      :image-alt="pageHeroImages.home.alt"
+      :image-position="pageHeroImages.home.position"
     />
     <ServicesGrid :limit="8" show-all-link />
     <BenefitsSection />

@@ -36,8 +36,14 @@ function validateLead(body: LeadBody) {
   if (!body.phone?.trim()) {
     throw createError({ statusCode: 400, statusMessage: 'Телефон обовʼязковий' })
   }
+  if (!body.car?.trim()) {
+    throw createError({ statusCode: 400, statusMessage: 'Вкажіть марку та модель авто' })
+  }
   if (!body.problem?.trim()) {
     throw createError({ statusCode: 400, statusMessage: 'Опишіть проблему' })
+  }
+  if (!body.preferredDay?.trim()) {
+    throw createError({ statusCode: 400, statusMessage: 'Вкажіть бажаний день' })
   }
 }
 
@@ -74,7 +80,9 @@ function telegramField(label: string, value: string, options?: { copyable?: bool
   return `<b>${label}</b>\n${rendered}`
 }
 
-function formatTelegramMessage(body: Required<Pick<LeadBody, 'name' | 'phone' | 'problem'>> & LeadBody) {
+function formatTelegramMessage(
+  body: Required<Pick<LeadBody, 'name' | 'phone' | 'car' | 'problem' | 'preferredDay'>> & Pick<LeadBody, 'sourcePage'>,
+) {
   const blocks = [
     '✨ <b>Нова заявка · Navi Motors</b>',
     '',
@@ -82,9 +90,9 @@ function formatTelegramMessage(body: Required<Pick<LeadBody, 'name' | 'phone' | 
     telegramField('📞 Телефон', formatPhoneDisplay(body.phone), { copyable: true }),
   ]
 
-  if (body.car) blocks.push('', telegramField('🚙 Авто', body.car))
+  blocks.push('', telegramField('🚙 Авто', body.car!))
   blocks.push('', telegramField('🔧 Проблема', body.problem))
-  if (body.preferredDay) blocks.push('', telegramField('📅 Бажаний день', body.preferredDay))
+  blocks.push('', telegramField('📅 Бажаний день', body.preferredDay!))
 
   const footer: string[] = []
   if (body.sourcePage) footer.push(`📍 ${escapeHtml(body.sourcePage)}`)
@@ -118,8 +126,8 @@ export default defineEventHandler(async (event) => {
     name: body.name!.trim(),
     phone: body.phone!.trim(),
     problem: body.problem!.trim(),
-    car: body.car?.trim(),
-    preferredDay: body.preferredDay?.trim(),
+    car: body.car!.trim(),
+    preferredDay: body.preferredDay!.trim(),
     sourcePage: body.sourcePage?.trim(),
   })
 

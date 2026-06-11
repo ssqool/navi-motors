@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getServiceBySlug } from '~/data/services'
-import { serviceHeroImages } from '~/data/gallery'
+import { getServiceHero } from '~/data/gallery'
 
 definePageMeta({ layout: 'default' })
 
@@ -24,6 +24,7 @@ useSeo({
   path: `/poslugy/${service.slug}`,
   ogType: 'article',
 })
+const serviceHero = computed(() => getServiceHero(service.slug))
 </script>
 
 <template>
@@ -37,8 +38,9 @@ useSeo({
     <HeroSection
       :title="service.h1"
       :subtitle="service.heroText"
-      :image="serviceHeroImages[service.slug]"
-      :image-alt="`${service.title} — Navi Motors, Київ`"
+      :image="serviceHero.src"
+      :image-alt="serviceHero.alt"
+      :image-position="serviceHero.position"
       :show-cta="true"
     />
 

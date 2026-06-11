@@ -66,6 +66,12 @@ export default defineNuxtConfig({
         sitemap: '/sitemap.xml',
       },
 
+  routeRules: {
+    '/poslugy/perevirka-avto-pered-kupivleiu-kyiv': {
+      redirect: { to: '/poslugy/diagnostyka-avto-kyiv', statusCode: 301 },
+    },
+  },
+
   runtimeConfig: {
     telegramBotToken: '',
     telegramChatId: '',
@@ -93,7 +99,6 @@ export default defineNuxtConfig({
         '/poslugy/remont-dvyguna-kyiv',
         '/poslugy/remont-transmisii-kyiv',
         '/poslugy/remont-rulevoho-upravlinnia-kyiv',
-        '/poslugy/perevirka-avto-pered-kupivleiu-kyiv',
       ],
     },
   },

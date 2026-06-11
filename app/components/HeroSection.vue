@@ -10,6 +10,7 @@ interface Props {
   compact?: boolean
   image?: string
   imageAlt?: string
+  imagePosition?: string
   imageWidth?: number
   imageHeight?: number
 }
@@ -24,6 +25,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const backgroundImage = computed(() => props.image ?? heroImage.src)
 const backgroundAlt = computed(() => props.imageAlt ?? heroImage.alt)
+const backgroundPosition = computed(() => props.imagePosition ?? heroImage.position ?? 'center')
 
 const { trackPhoneClick, trackBookingClick } = useAnalytics()
 
@@ -49,7 +51,8 @@ useHead(() => ({
         :height="imageHeight"
         fetchpriority="high"
         decoding="async"
-        class="hero-bg-enter hero-bg-zoom absolute inset-0 h-full w-full object-cover opacity-[0.22]"
+        class="hero-bg-enter hero-bg-zoom absolute inset-0 h-full w-full object-cover opacity-[0.32]"
+        :style="{ objectPosition: backgroundPosition }"
       >
     </div>
     <div class="absolute inset-0 bg-gradient-to-r from-bg via-bg/92 to-bg/55" />
@@ -104,7 +107,7 @@ useHead(() => ({
           style="--hero-delay: 200ms"
         >
           <a href="#lead-form" class="btn-primary" @click="trackBookingClick('hero')">
-            Записатись на ремонт
+            Залишити заявку
           </a>
           <UiPhoneButton variant="secondary" location="hero" />
           <UiMapButton variant="secondary" location="hero" />

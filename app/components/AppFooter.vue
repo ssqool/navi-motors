@@ -44,7 +44,7 @@ const socialLinks = [
             <li><NuxtLink to="/poslugy" class="link-focus hover:text-accent">Послуги</NuxtLink></li>
             <li><NuxtLink to="/pro-nas" class="link-focus hover:text-accent">Про нас</NuxtLink></li>
             <li><NuxtLink to="/kontakty" class="link-focus hover:text-accent">Контакти</NuxtLink></li>
-            <li><NuxtLink to="/#lead-form" class="link-focus hover:text-accent" @click="trackBookingClick('footer')">Запис на ремонт</NuxtLink></li>
+            <li><NuxtLink to="/#lead-form" class="link-focus hover:text-accent" @click="trackBookingClick('footer')">Залишити заявку</NuxtLink></li>
           </ul>
         </div>
 

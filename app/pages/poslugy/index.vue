@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { pageHeroImages } from '~/data/gallery'
+
 definePageMeta({ layout: 'default' })
 
 const breadcrumbs = [
@@ -21,6 +23,9 @@ useSeo({
     <HeroSection
       title="Послуги автосервісу Navi Motors"
       subtitle="Navi Motors виконує діагностику, планове технічне обслуговування та ремонт авто у Києві. Працюємо з основними системами автомобіля: ходова, гальма, двигун, трансмісія, рульове управління та інші вузли."
+      :image="pageHeroImages.services.src"
+      :image-alt="pageHeroImages.services.alt"
+      :image-position="pageHeroImages.services.position"
       :show-cta="false"
       compact
     />
