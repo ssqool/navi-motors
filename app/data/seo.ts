@@ -12,6 +12,12 @@ export const seoConfig = {
   geoPlacename: 'Київ',
   /** Include aggregateRating in Schema.org only when GBP data is real */
   includeAggregateRating: !IS_MOCK_DATA,
+  ogImage: {
+    path: '/images/og/navi-motors.png',
+    width: 1200,
+    height: 630,
+    alt: 'Navi Motors — СТО у Києві',
+  },
 } as const
 
 export const homepageFaq = [
