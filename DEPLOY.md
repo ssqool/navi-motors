@@ -4,7 +4,7 @@
 
 - [ ] Connect GitHub repo to [vercel.com](https://vercel.com)
 - [ ] Add environment variables:
-  - `NUXT_PUBLIC_SITE_URL` = `https://your-domain.com.ua`
+  - `NUXT_PUBLIC_SITE_URL` = `https://navimotors.kyiv.ua`
   - `NUXT_TELEGRAM_BOT_TOKEN` = bot token
   - `NUXT_TELEGRAM_CHAT_ID` = chat ID
   - `NUXT_PUBLIC_GA_ID` = client's GA4 Measurement ID `G-…` (optional, see `docs/ANALYTICS.md`)
@@ -17,7 +17,7 @@
 - [ ] Open [search.google.com/search-console](https://search.google.com/search-console)
 - [ ] Add property (URL prefix or Domain)
 - [ ] Verify ownership (DNS or HTML tag)
-- [ ] Submit sitemap: `https://your-domain.com.ua/sitemap.xml`
+- [ ] Submit sitemap: `https://navimotors.kyiv.ua/sitemap.xml`
 
 ## 3. Google Business Profile
 

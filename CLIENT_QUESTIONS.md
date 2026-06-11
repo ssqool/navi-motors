@@ -73,7 +73,7 @@
 
 ## Technical / launch
 
-24. Final **domain** (e.g. `navi-motors.com.ua`)?
+24. Final **domain** — confirmed: **`navimotors.kyiv.ua`**
 25. Who creates the **Telegram bot** for lead form (token + chat_id)?
 26. **Google Analytics** or **Plausible** needed?
 27. Who manages **Search Console** after launch?

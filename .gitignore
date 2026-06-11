@@ -56,3 +56,6 @@ coverage
 
 # Misc local files
 *.local
+
+# Client handoff (secrets / setup — do not push)
+docs/CLIENT_TELEGRAM.md

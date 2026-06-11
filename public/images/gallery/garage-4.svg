@@ -3,5 +3,5 @@
   <rect x="100" y="100" width="400" height="250" rx="8" fill="#141414" stroke="#2A2A2A"/>
   <rect x="140" y="140" width="80" height="80" rx="4" fill="#D62828" opacity="0.3"/>
   <rect x="260" y="140" width="80" height="80" rx="4" fill="#D62828" opacity="0.2"/>
-  <text x="300" y="390" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" fill="#A3A3A3">09AB5@ 70 @>1>B>N</text>
+  <text x="300" y="390" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" fill="#A3A3A3">Майстер за роботою</text>
 </svg>

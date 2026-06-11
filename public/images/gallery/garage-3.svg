@@ -2,5 +2,5 @@
   <rect width="600" height="450" fill="#141414"/>
   <circle cx="300" cy="180" r="80" fill="#1C1C1C" stroke="#D62828" stroke-width="2"/>
   <rect x="220" y="280" width="160" height="8" rx="4" fill="#2A2A2A"/>
-  <text x="300" y="360" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" fill="#A3A3A3"> 5<>=B 02B></text>
+  <text x="300" y="360" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" fill="#A3A3A3">Ремонт авто</text>
 </svg>

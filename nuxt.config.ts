@@ -47,7 +47,7 @@ export default defineNuxtConfig({
   },
 
   site: {
-    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://navi-motors.com.ua',
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://navimotors.kyiv.ua',
     name: 'Navi Motors',
     description: 'Автосервіс у Києві — діагностика, ТО та ремонт авто. Navi Motors, вул. Віталія Скакуна, 26.',
     defaultLocale: 'uk',
@@ -71,7 +71,7 @@ export default defineNuxtConfig({
     telegramChatId: '',
     metaAccessToken: process.env.NUXT_META_ACCESS_TOKEN || '',
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://navi-motors.com.ua',
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://navimotors.kyiv.ua',
       gaId: process.env.NUXT_PUBLIC_GA_ID || '',
       plausibleDomain: process.env.NUXT_PUBLIC_PLAUSIBLE_DOMAIN || '',
     },

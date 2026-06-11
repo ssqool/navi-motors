@@ -41,20 +41,58 @@ function validateLead(body: LeadBody) {
   }
 }
 
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+}
+
+function formatPhoneDisplay(phone: string): string {
+  let digits = phone.replace(/\D/g, '')
+  if (digits.startsWith('380')) digits = digits.slice(3)
+  else if (digits.startsWith('0')) digits = digits.slice(1)
+  if (digits.length !== 9) return phone
+
+  return `+380 ${digits.slice(0, 2)} ${digits.slice(2, 5)} ${digits.slice(5, 7)} ${digits.slice(7, 9)}`
+}
+
+function formatKyivTimestamp(): string {
+  return new Intl.DateTimeFormat('uk-UA', {
+    timeZone: 'Europe/Kyiv',
+    day: 'numeric',
+    month: 'long',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(new Date())
+}
+
+function telegramField(label: string, value: string, options?: { copyable?: boolean }) {
+  const safeValue = escapeHtml(value)
+  const rendered = options?.copyable ? `<code>${safeValue}</code>` : safeValue
+
+  return `<b>${label}</b>\n${rendered}`
+}
+
 function formatTelegramMessage(body: Required<Pick<LeadBody, 'name' | 'phone' | 'problem'>> & LeadBody) {
-  const lines = [
-    'Нова заявка з сайту Navi Motors',
+  const blocks = [
+    '✨ <b>Нова заявка · Navi Motors</b>',
     '',
-    `Імʼя: ${body.name}`,
-    `Телефон: ${body.phone}`,
+    telegramField('👤 Імʼя', body.name),
+    telegramField('📞 Телефон', formatPhoneDisplay(body.phone), { copyable: true }),
   ]
 
-  if (body.car) lines.push(`Авто: ${body.car}`)
-  lines.push(`Проблема: ${body.problem}`)
-  if (body.preferredDay) lines.push(`Бажаний день: ${body.preferredDay}`)
-  if (body.sourcePage) lines.push(`Сторінка: ${body.sourcePage}`)
+  if (body.car) blocks.push('', telegramField('🚙 Авто', body.car))
+  blocks.push('', telegramField('🔧 Проблема', body.problem))
+  if (body.preferredDay) blocks.push('', telegramField('📅 Бажаний день', body.preferredDay))
 
-  return lines.join('\n')
+  const footer: string[] = []
+  if (body.sourcePage) footer.push(`📍 ${escapeHtml(body.sourcePage)}`)
+  footer.push(`🕐 ${formatKyivTimestamp()}`)
+
+  blocks.push('', '───────────────', footer.join('  ·  '))
+
+  return blocks.join('\n')
 }
 
 export default defineEventHandler(async (event) => {
@@ -95,8 +133,8 @@ export default defineEventHandler(async (event) => {
         parse_mode: 'HTML',
       },
     },
-  ).catch((error) => {
-    console.error('[lead] Telegram API error:', error)
+  ).catch((error: { data?: { description?: string } }) => {
+    console.error('[lead] Telegram API error:', error.data?.description ?? error)
     throw createError({ statusCode: 502, statusMessage: 'Не вдалося надіслати заявку' })
   })
 

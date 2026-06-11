@@ -64,7 +64,7 @@ See [`DEPLOY.md`](DEPLOY.md) for the full checklist.
 1. Import the GitHub repo at [vercel.com](https://vercel.com)
 2. Add env vars from `.env.example`
 3. Deploy — SSL is automatic
-4. Set `NUXT_PUBLIC_SITE_URL` to your production domain and redeploy
+4. Set `NUXT_PUBLIC_SITE_URL` to `https://navimotors.kyiv.ua` and redeploy
 
 ## Analytics (GA4)
 
