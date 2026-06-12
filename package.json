@@ -10,7 +10,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "images:hero-webp": "npx --yes -p sharp node scripts/generate-hero-webp.mjs"
   },
   "dependencies": {
     "@nuxt/image": "^2.0.0",

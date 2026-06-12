@@ -26,34 +26,59 @@ const props = withDefaults(defineProps<Props>(), {
 const backgroundImage = computed(() => props.image ?? heroImage.src)
 const backgroundAlt = computed(() => props.imageAlt ?? heroImage.alt)
 const backgroundPosition = computed(() => props.imagePosition ?? heroImage.position ?? 'center')
+const backgroundWebpSrcSet = computed(() => heroWebpSrcSet(backgroundImage.value))
+const backgroundWebpPreload = computed(() => heroWebpSrc(backgroundImage.value))
 
 const { trackPhoneClick, trackBookingClick } = useAnalytics()
 
-useHead(() => ({
-  link: [
-    {
+useHead(() => {
+  const links: Array<Record<string, string>> = []
+
+  if (backgroundWebpSrcSet.value && backgroundWebpPreload.value) {
+    links.push({
+      rel: 'preload',
+      as: 'image',
+      type: 'image/webp',
+      href: backgroundWebpPreload.value,
+      imagesrcset: backgroundWebpSrcSet.value,
+      imagesizes: '100vw',
+      fetchpriority: 'high',
+    })
+  }
+  else {
+    links.push({
       rel: 'preload',
       as: 'image',
       href: backgroundImage.value,
       fetchpriority: 'high',
-    },
-  ],
-}))
+    })
+  }
+
+  return { link: links }
+})
 </script>
 
 <template>
   <section class="relative overflow-hidden border-b border-border bg-bg-soft">
     <div class="absolute inset-0 overflow-hidden">
-      <img
-        :src="backgroundImage"
-        :alt="backgroundAlt"
-        :width="imageWidth"
-        :height="imageHeight"
-        fetchpriority="high"
-        decoding="async"
-        class="hero-bg-enter hero-bg-zoom absolute inset-0 h-full w-full object-cover opacity-[0.32]"
-        :style="{ objectPosition: backgroundPosition }"
-      >
+      <picture>
+        <source
+          v-if="backgroundWebpSrcSet"
+          :srcset="backgroundWebpSrcSet"
+          sizes="100vw"
+          type="image/webp"
+        >
+        <img
+          :src="backgroundImage"
+          :alt="backgroundAlt"
+          :width="imageWidth"
+          :height="imageHeight"
+          fetchpriority="high"
+          decoding="async"
+          class="hero-bg-enter hero-bg-zoom absolute inset-0 h-full w-full object-cover opacity-[0.32]"
+          :style="{ objectPosition: backgroundPosition }"
+        >
+      </picture>
     </div>
     <div class="absolute inset-0 bg-gradient-to-r from-bg via-bg/92 to-bg/55" />
     <div class="absolute inset-0 bg-gradient-to-br from-accent-soft via-transparent to-transparent" />

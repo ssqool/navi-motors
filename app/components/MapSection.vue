@@ -14,7 +14,7 @@ const { trackPhoneClick, trackMapClick } = useAnalytics()
         </p>
       </UiReveal>
 
-      <div class="mt-10 grid gap-8 lg:grid-cols-2">
+      <div class="mt-10 grid gap-8 lg:grid-cols-2 lg:items-stretch">
         <UiReveal>
           <div class="space-y-6">
             <div class="card-static">
@@ -46,13 +46,13 @@ const { trackPhoneClick, trackMapClick } = useAnalytics()
           </div>
         </UiReveal>
 
-        <UiReveal variant="slide-right" :delay="100">
-          <div class="min-h-[400px] overflow-hidden rounded-xl border border-border transition-shadow duration-300 hover:shadow-xl hover:shadow-black/20">
+        <UiReveal variant="slide-right" :delay="100" class="h-full min-h-[400px]">
+          <div class="h-full min-h-[400px] overflow-hidden rounded-xl border border-border transition-shadow duration-300 hover:shadow-xl hover:shadow-black/20">
             <iframe
               :src="siteConfig.googleMapsEmbed"
               width="100%"
               height="100%"
-              class="min-h-[400px] w-full"
+              class="h-full w-full"
               style="border:0"
               allowfullscreen
               loading="lazy"
