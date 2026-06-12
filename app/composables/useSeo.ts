@@ -52,7 +52,10 @@ export function useSeo(options: SeoOptions) {
   const imagePath = options.image ?? seoConfig.ogImage.path
   const image = resolveAbsoluteUrl(imagePath, origin)
   const ogDescription = options.ogDescription ?? options.description
-  const robots = options.noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+  const stagingHost = isStagingHost(hostnameFromOrigin(origin))
+  const robots = options.noindex || stagingHost
+    ? 'noindex, nofollow'
+    : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
 
   useSeoMeta({
     title: options.title,
