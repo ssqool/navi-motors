@@ -203,6 +203,14 @@
   .nav-link-active {
     @apply text-accent;
   }
+
+  .scroll-top-btn {
+    @apply fixed bottom-6 right-4 z-50 inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-border bg-surface/95 text-text shadow-lg shadow-black/25 backdrop-blur-md transition-[bottom,transform,background-color,border-color,color] duration-[250ms] ease-out hover:-translate-y-0.5 hover:border-accent/40 hover:bg-accent hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg md:bottom-8 md:right-6;
+  }
+
+  .scroll-top-btn--above-cta {
+    bottom: calc(5.75rem + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 @layer utilities {
@@ -303,6 +311,19 @@
   transform: translateY(100%);
 }
 
+.scroll-top-enter-active,
+.scroll-top-leave-active {
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.scroll-top-enter-from,
+.scroll-top-leave-to {
+  opacity: 0;
+  transform: translateY(12px) scale(0.92);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal,
   .reveal-fade-up,
@@ -336,7 +357,15 @@
   .menu-enter-active,
   .menu-leave-active,
   .sticky-cta-enter-active,
-  .sticky-cta-leave-active {
+  .sticky-cta-leave-active,
+  .scroll-top-enter-active,
+  .scroll-top-leave-active {
+    transition: none !important;
+  }
+
+  .scroll-top-btn,
+  .scroll-top-btn:hover {
+    transform: none !important;
     transition: none !important;
   }
 

@@ -7,6 +7,7 @@
     </main>
     <AppFooter />
     <AppStickyCta />
+    <AppScrollTop />
   </div>
 </template>
 
