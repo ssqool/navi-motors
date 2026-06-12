@@ -27,6 +27,22 @@
   h1, h2, h3, h4 {
     @apply font-heading uppercase tracking-wide;
   }
+
+  a[href],
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']),
+  summary,
+  label[for],
+  input[type='checkbox'],
+  input[type='radio'],
+  select {
+    @apply cursor-pointer;
+  }
+
+  button:disabled,
+  [aria-disabled='true'] {
+    @apply cursor-not-allowed;
+  }
 }
 
 @layer components {
@@ -39,15 +55,15 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white transition-[transform,background-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:bg-accent-hover hover:shadow-lg hover:shadow-accent/20 active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg disabled:pointer-events-none disabled:opacity-60;
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white transition-[transform,background-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:bg-accent-hover hover:shadow-lg hover:shadow-accent/20 active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-60;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-transparent px-6 py-3 text-sm font-semibold text-text transition-[transform,background-color,border-color] duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-surface active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 focus:ring-offset-bg;
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-border bg-transparent px-6 py-3 text-sm font-semibold text-text transition-[transform,background-color,border-color] duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-surface active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 focus:ring-offset-bg;
   }
 
   .card {
-    @apply rounded-xl border border-border bg-surface p-6 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-xl hover:shadow-black/20;
+    @apply cursor-pointer rounded-xl border border-border bg-surface p-6 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-xl hover:shadow-black/20;
   }
 
   .card-static {
@@ -142,7 +158,7 @@
 
   /* Nav link underline */
   .nav-link {
-    @apply relative text-sm font-medium transition-colors hover:text-accent focus-visible:outline-none focus-visible:text-accent;
+    @apply relative cursor-pointer text-sm font-medium transition-colors hover:text-accent focus-visible:outline-none focus-visible:text-accent;
   }
 
   .nav-link::after {
@@ -157,11 +173,11 @@
   }
 
   .link-focus {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-bg focus-visible:rounded-sm;
+    @apply cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-bg focus-visible:rounded-sm;
   }
 
   .skip-link {
-    @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-xl focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white;
+    @apply sr-only cursor-pointer focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-xl focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white;
   }
 
   .nav-link-active {
