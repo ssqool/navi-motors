@@ -105,16 +105,9 @@ const serviceHero = computed(() => getServiceHero(service.slug))
         <UiReveal>
           <h2 class="section-title">Часті запитання</h2>
         </UiReveal>
-        <div class="mt-8 space-y-4">
-          <UiReveal
-            v-for="(item, index) in service.faq"
-            :key="item.question"
-            :delay="index * 50"
-          >
-            <UiFaqItem
-              :question="item.question"
-              :answer="item.answer"
-            />
+        <div class="mt-8">
+          <UiReveal :delay="80">
+            <UiFaqList :items="service.faq" />
           </UiReveal>
         </div>
       </div>

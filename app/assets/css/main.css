@@ -74,27 +74,47 @@
     @apply rounded-xl border border-border bg-surface transition-[border-color] duration-200 hover:border-accent/25;
   }
 
-  .faq-summary {
-    @apply flex cursor-pointer list-none items-center justify-between gap-4 p-6 font-medium text-text-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset [&::-webkit-details-marker]:hidden;
+  .faq-list {
+    @apply relative;
   }
 
-  .faq-content {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  .faq-measure {
+    @apply pointer-events-none invisible absolute inset-x-0 top-0;
   }
 
-  .faq-content--open {
-    grid-template-rows: 1fr;
+  .faq-trigger {
+    @apply flex cursor-pointer items-center justify-between gap-4 p-6 font-medium text-text-soft transition-[color,background-color] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset;
   }
 
-  .faq-content-inner {
-    min-height: 0;
+  .faq-trigger--active {
+    @apply text-text;
+  }
+
+  .faq-answer-slot {
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      height 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.25s ease;
+  }
+
+  .faq-answer-slot--open {
+    opacity: 1;
+  }
+
+  .faq-answer-slot-inner {
+    height: 100%;
     overflow: hidden;
   }
 
-  .faq-answer {
-    @apply border-t border-border px-6 py-4 text-sm text-text-muted;
+  .faq-answer-body {
+    @apply border-t border-border px-6 py-4 text-sm leading-relaxed text-text-muted;
+  }
+
+  .faq-reserve {
+    flex-shrink: 0;
+    transition: height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .section-title {
@@ -301,7 +321,9 @@
     transform: none !important;
   }
 
-  .faq-content {
+  .faq-answer-slot,
+  .faq-answer-slot--open,
+  .faq-reserve {
     transition: none !important;
   }
 
